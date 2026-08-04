@@ -2,3 +2,5 @@ admin-webclient/.env
 mobileclient/.env
 webclient/.env
 .env
+
+node_modules
