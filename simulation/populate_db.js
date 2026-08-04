@@ -201,7 +201,6 @@ async function utils() {
             await deleteAll('scooters');
             break;
         case 'addScooter':
-            // console.log(await newScooter('Malmö'));
             const aScooter = await newScooter('Malmö');
             await addScooter(aScooter);
             break;

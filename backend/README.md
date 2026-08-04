@@ -4,19 +4,15 @@ In order to get access to the database you need to add a .env file in the root o
 The file should contain the following:
 
 //Connect to MongoDB Atlas
-ATLAS_USERNAME="pokr23"
-ATLAS_PASSWORD="ZGflIkHYako1vQiZ"
+ATLAS_USERNAME="<your-atlas-username>"
+ATLAS_PASSWORD="<your-atlas-password>"
 
 //Used for tests
-API_KEY='6b00bafa-4f70-463b-a4c3-1234c317a09f'
+API_KEY='<your-api-key>'
 
 # API-keys
 
-- '9d2f30e0-7c3a-471f-9b94-48e8bc743ec9'
-- 'f8c43cd9-12e0-42bd-b5ad-d72449e25a4c'
-- 'b2165d45-330a-4aa1-86c6-7111973cb64b'
-- 'cf14b9e7-c826-4227-97cf-d90eb51a6631'
-- '6b00bafa-4f70-463b-a4c3-1234c317a09f'
+Ask a maintainer for a valid API key, or generate your own for local development.
 
 ### Example usage for requests
 
@@ -26,7 +22,7 @@ const response = await fetch(
     {
         method: 'GET',
         headers: {
-            'x-api-key': '9d2f30e0-7c3a-471f-9b94-48e8bc743ec9',
+            'x-api-key': '<your-api-key>',
             'Content-Type': 'application/json'
         },
     },);

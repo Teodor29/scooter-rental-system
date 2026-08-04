@@ -35,12 +35,12 @@ To run the entire system locally with Docker, follow these steps:
 Clone the repository to your local machine:
 
 ```
-git clone https://github.com/Teodor29/e-scooter-project-vteam
+git clone https://github.com/Teodor29/scooter-rental-system
 ```
 
 ### 2. Configure Environment Variables
 
-Create a `.env` file in the root directory `vteam-project`, and add the following environment variables:
+Create a `.env` file in the root directory `scooter-rental-system`, and add the following environment variables:
 
 ```
 # Global variables

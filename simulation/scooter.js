@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import database from './modules/scooter_db.js';
-// import { simulateMovementWithScooter, simulateMovementWithSpeed } from './modules/simulation.js';
 
 const UPDATE_INTERVAL = process.env.UPDATE_INTERVAL || 10000;  // Default to 10000 ms
 const SCOOTER_SPEED = process.env.SCOOTER_SPEED || 20;
@@ -29,13 +28,11 @@ export default class Scooter {
                 this.updateInterval = setInterval(() => {
                     this.save();
                 }, UPDATE_INTERVAL); // Update every 10 seconds
-                // console.log(`Interval started for scooter: "${this.scooterID}"`);
             }
         } else {
             if (this.updateInterval !== null) { // Clear the interval if it exists
                 clearInterval(this.updateInterval);
                 this.updateInterval = null;
-                // console.log(`Interval stopped for scooter: "${this.scooterID}"`);
             }
         }
     }
@@ -59,20 +56,11 @@ export default class Scooter {
             this.setStatus("available");
             this.setSpeed(0);
             this.setUser(null);
-            // console.log('Saving scooter data...');
-
-            // await this.save();
         } catch (error) {
             console.error("Error updating scooter status to 'available':", error.message);
             throw new Error("Failed to set scooter status to 'available'");
         }
     }
-
-    // async rideToDestination(destination) {
-    //     this.setSpeed(SCOOTER_SPEED);
-    //     const arrived = await simulateMovementWithScooter(this, destination);
-    //     return arrived
-    // }
 
     async turnOff() {
         try {
@@ -91,7 +79,6 @@ export default class Scooter {
     
             while (this.battery < 100) {
                 this.battery += 1;
-                // console.log(`Battery level: ${this.battery}%`);
                 await new Promise(resolve => setTimeout(resolve, BATTERY_CHARGE_RATE));
             }
     
@@ -184,49 +171,12 @@ export default class Scooter {
                 tripLog: this.tripLog
             };
 
-            const result = await database.updateScooter(updatedScooterData);
-            // const result = await database.updateScooter(this.scooterID, updatedScooterData);
-
-            // if (result) {
-            //     console.log(`Scooter "${this.scooterID}" updated successfully.`);
-            // }
+            await database.updateScooter(updatedScooterData);
         } catch (error) {
             console.error('Error saving scooter:', error.message);
             throw new Error('Failed to save scooter');
         }
     }
-
-
-    // static async loadScooter(scooterID) {
-    //     try {
-    //         let scooter = await database.getScooter(scooterID);
-    //         if (!scooter) {
-    //             throw new Error(`No scooter found with ID: ${scooterID}`);
-    //         }
-    //         return scooter;
-    //     } catch (error) {
-    //         console.error('Error loading scooter:', error);
-    //         throw new Error('Failed to load scooter');
-    //     }
-    // }
-
-    // static async updateLocation(scooterID, newLocation) {
-    //     try {
-    //         let scooter = await Scooter.loadScooter(scooterID);
-            
-    //         if (!scooter) {
-    //             throw new Error(`No scooter found with ID: ${scooterID}`);
-    //         }
-
-    //         scooter.location = newLocation;
-
-    //         let updatedScooter = await database.updateLocation(scooterID, scooter.location);
-    //         return updatedScooter;
-    //     } catch (error) {
-    //         console.error('Error updating scooter location:', error);
-    //         throw new Error('Failed to update scooter location');
-    //     }
-    // }
 
     setSpeed(newSpeed) {
         this.speed = newSpeed;

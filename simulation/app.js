@@ -4,7 +4,6 @@ dotenv.config();
 
 import database from './modules/db.js';
 import cities from './modules/cities_db.js';
-// import { startSimulateTrip, simulateWithUsers } from './scooter_pool.js'
 import Scooter from './scooter.js';
 import { moveScooters } from './modules/simulation.js';
 
@@ -109,31 +108,3 @@ async function runSimulation() {
 // Cykeln varnar när den behöver laddas.
 // Cykeln sparar en logg över sina resor med start (plats, tid) och slut (plats, tid) samt kund.
 // När cykeln tas in för underhåll eller laddning så markeras det att cykeln är i underhållsläge. En cykel som laddas på en laddstation kan inte hyras av en kund och en röd lampa visar att den inte är tillgänglig.
-
-
-// (async function main() {
-//     try {
-//         if (process.env.NODE_ENV === 'dev') {
-//             console.log('Running simulation in development mode...');
-            
-//             let scooters = await database.getAll('scooters');
-//             console.log(scooters);
-//             let customers = await database.getAll('customers');
-
-//             if (scooters && scooters.length > 0) {
-//                 let firstScooterID = scooters[0]._id;
-//                 let firstCustomerID = customers[0]._id;
-//                 await startSimulateTrip(firstCustomerID, firstScooterID);
-//             } else {
-//                 console.log('No scooters found in the collection.');
-//             }
-//         } else if (process.env.NODE_ENV === 'prod') {
-//             console.log('Running simulation with users in production mode...');
-//             // await simulateWithUsers();
-//         } else {
-//             console.warn('NODE_ENV is not set or has an invalid value. Please set it to "dev" or "prod".');
-//         }
-//     } catch (error) {
-//         console.error('Error during simulation:', error.message);
-//     }
-// })();

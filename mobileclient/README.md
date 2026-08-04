@@ -11,7 +11,7 @@ To run the project locally, you need to configure a few environment variables. T
 ### Example .env file:
 
 ```
-VITE_API_KEY="6b00bafa-4f70-463b-a4c3-1234c317a09f"
+VITE_API_KEY="<your-api-key>"
 VITE_BASE_URL="http://localhost:5001"
 ```
 

@@ -8,10 +8,6 @@ import { canIPark, getRandomCoordinates } from './modules/simulation.js';
 const RENTING_PERCENTAGE = parseFloat(process.env.RENTING_PERCENTAGE) || 50;
 const MAX_SIMULATIONS = parseInt(process.env.MAX_SIMULATIONS, 10) || 100; // Default max 100
 
-//For tomorrow. 
-//check if we can remove all console logs and
-//how to solve the update problem for the scooters
-
 export async function startSimulateTrip(userID, scooterID) {
     try {
         const scooter = await Scooter.loadObjectScooter(scooterID);
@@ -19,20 +15,14 @@ export async function startSimulateTrip(userID, scooterID) {
 
         const destination = await getRandomCoordinates(scooter.city);
 
-        
-        // console.log(scooter.city);
         scooter.setStatus('available');
-        // scooter.setUser(null);
-        // scooter.setBattery(90);
 
         const rented = await scooter.rent(userID);
         if (!rented) return console.warn('Scooter could not be rented');
 
         const arrived = await scooter.rideToDestination(destination);
         if (!arrived) {
-            // console.warn('Scooter did not arrive at the destination.');
             if (scooter.batteryLow()) {
-                // console.log('Battery is low. Initiating charging process...');
                 await scooter.charge();
             }
             return;
@@ -42,7 +32,6 @@ export async function startSimulateTrip(userID, scooterID) {
         if (!parkingSpot) return console.warn('No parking spot available. Please try another location.');
 
         await scooter.park();
-        // scooter.printInfo();
     } catch (error) {
         console.error('Error simulating trip:', error.message);
     }

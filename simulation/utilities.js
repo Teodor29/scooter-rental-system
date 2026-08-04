@@ -157,7 +157,6 @@ async function utils() {
     switch (command) {
         case 'custom':
             let scooter = await Scooter.loadObjectScooter("6761f728b2bfdd488eb5c71e");
-            // console.log(scooter);
             scooter.status = "available";
             scooter.printInfo();
             scooter.save();
