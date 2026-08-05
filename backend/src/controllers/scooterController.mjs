@@ -91,8 +91,7 @@ const scooters = {
                 await db.client.close();
             }
         }
-    },
-
+    }
 };
 
 export default scooters;

@@ -8,7 +8,7 @@ This project is developed by a group of students from Blekinge Institute of Tech
 
 ## Background
 
-The company "Svenska Elsparkcyklar AB" requires a system to manage the rental of electric scooters in Swedish cities. The company operates in three different cities and plans to expand to more cities with the support of a new data system. 
+The company "Svenska Elsparkcyklar AB" requires a system to manage the rental of electric scooters in Swedish cities. The company operates in three different cities and plans to expand to more cities with the support of a new data system.
 
 ---
 

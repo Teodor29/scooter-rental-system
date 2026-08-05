@@ -1,44 +1,44 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react"
 
-const CustomerContext = createContext();
+const CustomerContext = createContext()
 
-export const useCustomer = () => useContext(CustomerContext);
+export const useCustomer = () => useContext(CustomerContext)
 
 export const CustomerProvider = ({ customerId, children }) => {
-    const [customer, setCustomer] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const baseUrl = import.meta.env.VITE_MOCK_API_URL;
+  const [customer, setCustomer] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const baseUrl = import.meta.env.VITE_MOCK_API_URL
 
-    useEffect(() => {
-        if (!customerId) {
-            setError('Customer ID is required');
-            setLoading(false);
-            return;
+  useEffect(() => {
+    if (!customerId) {
+      setError("Customer ID is required")
+      setLoading(false)
+      return
+    }
+
+    // Fetch customer from the API
+    const fetchCustomer = async () => {
+      try {
+        const response = await fetch(`${baseUrl}/customers?_id=${customerId}`)
+        if (!response.ok) {
+          throw new Error("Failed to fetch customer")
         }
+        const data = await response.json()
+        setCustomer(data[0])
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-        // Fetch customer from the API
-        const fetchCustomer = async () => {
-            try {
-                const response = await fetch(`${baseUrl}/customers?_id=${customerId}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch customer');
-                }
-                const data = await response.json();
-                setCustomer(data[0]);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    fetchCustomer()
+  }, [customerId, baseUrl])
 
-        fetchCustomer();
-    }, [customerId, baseUrl]);
-
-    return (
-        <CustomerContext.Provider value={{ customer, error, loading }}>
-            {children}
-        </CustomerContext.Provider>
-    );
-};
+  return (
+    <CustomerContext.Provider value={{ customer, error, loading }}>
+      {children}
+    </CustomerContext.Provider>
+  )
+}

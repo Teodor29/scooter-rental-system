@@ -29,5 +29,4 @@ router.get('/city/:cityName', async (req, res) => {
     }
 });
 
-
 export default router;

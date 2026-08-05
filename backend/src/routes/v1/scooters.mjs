@@ -70,7 +70,6 @@ router.get('/all-scooters', async (req, res) => {
     }
 });
 
-
 router.get('/scooter/:id', async (req, res) => {
     const scooterId = req.params.id;
 
@@ -121,6 +120,5 @@ router.delete('/delete-one-scooter', async (req, res) => {
         });
     }
 });
-
 
 export default router;

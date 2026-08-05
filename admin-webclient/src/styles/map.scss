@@ -1,39 +1,37 @@
-@use 'variables';
+@use "variables";
 
 .map {
+  max-width: 1000px;
+  margin: 0 auto;
 
-    max-width: 1000px;
-    margin: 0 auto;
+  .leaflet-container {
+    width: 100%;
+    height: 70vh;
+  }
 
-    .leaflet-container {
-        width: 100%;
-        height: 70vh;
+  .leaflet-popup-content {
+    p {
+      margin: 0.5rem 0;
     }
-    
-    .leaflet-popup-content {
-        p {
-            margin: 0.5rem 0;
-        }
-    }
-    
-    .map-options {
-        label {
-            margin: 1rem;
-        }
-    }
+  }
 
-    .scooter-icon {
-        border-radius: 50%;
-        color: variables.$text-primary;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
+  .map-options {
+    label {
+      margin: 1rem;
     }
-    
-    .icon {
-        color: white;
-    }
-    
+  }
+
+  .scooter-icon {
+    border-radius: 50%;
+    color: variables.$text-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+  }
+
+  .icon {
+    color: white;
+  }
 }

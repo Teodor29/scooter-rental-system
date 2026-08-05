@@ -1,17 +1,17 @@
 {
-    "type": "module",
-    "name": "simulation",
-    "version": "1.0.0",
-    "scripts": {
-        "start": "node app.js",
-        "test": "mocha"
-    },
-    "dependencies": {
-        "@faker-js/faker": "^9.4.0",
-        "dotenv": "^16.4.7",
-        "mongodb": "^6.12.0"
-    },
-    "devDependencies": {
-        "mocha": "^11.0.1"
-    }
+  "type": "module",
+  "name": "simulation",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "dotenv": "^16.4.7",
+    "mongodb": "^6.12.0"
+  },
+  "devDependencies": {
+    "mocha": "^11.0.1"
+  }
 }

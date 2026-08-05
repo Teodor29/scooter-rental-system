@@ -9,7 +9,7 @@ async function connectDB() {
         return {
             db: db,
             client: client
-        }
+        };
     }
 
     let dsn = process.env.MONGODB_URI;

@@ -5,6 +5,7 @@
 To run the project locally, you need to configure a few environment variables. These variables should be placed in a `.env` file located in the admin-webclient folder.
 
 ### Required Environment Variables:
+
 - VITE_API_KEY: Your API key to authenticate requests to the backend API.
 - VITE_BASE_URL: The base URL for the backend API (http://localhost:5001 for local development).
 

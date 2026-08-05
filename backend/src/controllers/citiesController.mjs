@@ -27,7 +27,9 @@ const cities = {
 
         try {
             const db = await database.getCollection(collectionName);
-            const result = await db.collection.find(new ObjectId(cityName)).toArray();
+            const result = await db.collection
+                .find(new ObjectId(cityName))
+                .toArray();
 
             return result;
         } catch (error) {
@@ -38,7 +40,7 @@ const cities = {
                 await db.client.close();
             }
         }
-    },
+    }
 };
 
 export default cities;

@@ -1,32 +1,32 @@
-@use 'variables';
+@use "variables";
 
 .overview {
-    max-width: 1000px;
-    margin: 0 auto;
+  max-width: 1000px;
+  margin: 0 auto;
 
-    .cards {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 2rem;
+  .cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
 
-        .card {
-            background-color: variables.$background2;
-            box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            border-radius: 1rem;
-            text-align: center;
-            width: 150px;
+    .card {
+      background-color: variables.$background2;
+      box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      width: 150px;
 
-            h2 {
-                margin-bottom: 1rem;
-            }
+      h2 {
+        margin-bottom: 1rem;
+      }
 
-            p {
-                font-size: 3rem;
-                font-weight: 600;
-                margin: 0;
-            }
-        }
+      p {
+        font-size: 3rem;
+        font-weight: 600;
+        margin: 0;
+      }
     }
+  }
 }

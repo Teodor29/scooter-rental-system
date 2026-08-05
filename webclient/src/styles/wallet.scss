@@ -1,21 +1,20 @@
-@use 'variables';
+@use "variables";
 
 .wallet {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+
+  .wallet-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
+    justify-content: center;
 
-    .wallet-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .balance {
-            font-size: 3rem;
-            font-weight: 800;
-        }
+    .balance {
+      font-size: 3rem;
+      font-weight: 800;
     }
-
+  }
 }
