@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:20
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 4000
 
-CMD ["json-server", "--watch", "db.json", "--port", "4000"]
+CMD ["json-server", "--watch", "db.json", "--port", "4000", "--host", "0.0.0.0"]

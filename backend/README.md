@@ -4,8 +4,7 @@ In order to get access to the database you need to add a .env file in the root o
 The file should contain the following:
 
 //Connect to MongoDB Atlas
-ATLAS_USERNAME="<your-atlas-username>"
-ATLAS_PASSWORD="<your-atlas-password>"
+MONGODB_URI="<your-mongodb-atlas-connection-string>"
 
 //Used for tests
 API_KEY='<your-api-key>'

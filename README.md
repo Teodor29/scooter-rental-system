@@ -45,8 +45,7 @@ Create a `.env` file in the root directory `scooter-rental-system`, and add the 
 ```
 # Global variables
 API_KEY=<api key>
-ATLAS_USERNAME=<username>
-ATLAS_PASSWORD=<password>
+MONGODB_URI=<your-mongodb-atlas-connection-string>
 
 # Frontend
 VITE_API_KEY=<api key>

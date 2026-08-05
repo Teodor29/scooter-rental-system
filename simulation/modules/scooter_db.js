@@ -9,7 +9,7 @@ const collectionName = "scooters";
 
 // Connect to the database
 async function connectDB() {
-    let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@elsparkcyklar.svx9m.mongodb.net/?retryWrites=true&w=majority&appName=Elsparkcyklar`;
+    let dsn = process.env.MONGODB_URI;
 
     // Uses a local database for testing
     if (process.env.NODE_ENV === "test") {
