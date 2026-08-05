@@ -5,7 +5,6 @@ import React from 'react';
 function HistoryDetails() {
     const location = useLocation();
     const { rental } = location.state;
-    console.log(rental);
 
     return (
         <div className="main-content">

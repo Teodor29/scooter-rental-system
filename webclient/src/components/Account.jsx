@@ -31,7 +31,6 @@ function Account({ onLogout }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submit", customerInfo);
     };
 
     return (

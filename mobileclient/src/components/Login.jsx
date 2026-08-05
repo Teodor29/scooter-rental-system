@@ -4,7 +4,7 @@ function Login({onLogin}) {
     return (
         <div className="main-content">
             <div className="login">
-                <img src="../public/scooter.svg" alt="Login Image" />
+                <img src="/scooter.svg" alt="Login Image" />
                 <h2>Log in</h2>
                 <form onSubmit={onLogin}>
                     <input type="text" placeholder="Email" required />

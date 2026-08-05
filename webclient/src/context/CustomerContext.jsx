@@ -8,8 +8,7 @@ export const CustomerProvider = ({ customerId, children }) => {
     const [customer, setCustomer] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    // const baseUrl = import.meta.env.VITE_BASE_URL;
-    const baseUrl = "http://localhost:4000";
+    const baseUrl = import.meta.env.VITE_MOCK_API_URL;
 
     useEffect(() => {
         if (!customerId) {

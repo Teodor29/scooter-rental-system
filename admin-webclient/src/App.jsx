@@ -16,11 +16,9 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // Change to false to test login
     const handleLogin = () => {
         setIsLoggedIn(true);
-        console.log('Logged in');
     };
     const handleLogout = () => {
         setIsLoggedIn(false);
-        console.log('Logged out');
     };
 
     return (

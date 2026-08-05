@@ -19,15 +19,14 @@ function App() {
     const customerId = 1;
 
     // handle login
-    const handleLogin = () => {
+    const handleLogin = (event) => {
+        event.preventDefault();
         setIsLoggedIn(true);
-        console.log('Logged in');
     };
 
     // handle logout
     const handleLogout = () => {
         setIsLoggedIn(false);
-        console.log('Logged out');
     };
 
     return (

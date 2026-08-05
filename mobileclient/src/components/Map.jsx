@@ -66,7 +66,6 @@ function Map() {
         // fetch every 10 seconds
         const interval = setInterval(() => {
             fetchScooter();
-            console.log("fetching scooters");
         }, 10000);
 
         return () => clearInterval(interval);

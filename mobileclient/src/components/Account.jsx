@@ -35,7 +35,6 @@ function Account({ onLogout }) {
     // Handle form submit
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submit", customerInfo);
     };
 
     return (

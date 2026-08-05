@@ -66,7 +66,6 @@ function Map({ isLoggedIn }) {
         // fetch every 10 seconds
         const interval = setInterval(() => {
             fetchScooter();
-            console.log("fetching scooters");
         }, 10000);
 
         return () => clearInterval(interval);
@@ -76,9 +75,6 @@ function Map({ isLoggedIn }) {
         const cityId = event.target.value;
         const city = cities.data.find(city => city._id === cityId);
         setSelectedCity(city);
-        console.log(selectedCity);
-        console.log("parkZones", selectedCity.parkZones);
-        console.log("chargingZones", selectedCity.chargingZones);
     };
 
     const handleFilterChange = (event) => {

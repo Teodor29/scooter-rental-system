@@ -18,14 +18,13 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // Change to false to test login
     const customerId = 1;
 
-    const handleLogin = () => {
+    const handleLogin = (event) => {
+        event.preventDefault();
         setIsLoggedIn(true);
-        console.log('Logged in');
     };
 
     const handleLogout = () => {
         setIsLoggedIn(false);
-        console.log('Logged out');
     };
 
     return (
@@ -43,7 +42,7 @@ function App() {
                             <Route path="/history" element={<History />} />
                             <Route path="/history-details" element={<HistoryDetails />} />
                             <Route path="/add-funds" element={<AddFunds />} />
-                            <Route path="/login" element={<Login isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout} />} />
+                            <Route path="/login" element={<Login isLoggedIn={isLoggedIn} onLogin={handleLogin} handleLogout={handleLogout} />} />
                             <Route path="/signup" element={<Signup />} />
                         </Routes>
                     </div>

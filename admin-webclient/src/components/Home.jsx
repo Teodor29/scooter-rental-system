@@ -60,7 +60,6 @@ function Home({ isLoggedIn }) {
         const interval = setInterval(() => {
             fetchScooter();
             fetchCustomer();
-            console.log("fetching scooters and customers");
         }, 10000);
 
         return () => clearInterval(interval);
