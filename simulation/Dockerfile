@@ -1,10 +1,10 @@
-FROM node:16
+FROM node:22
 
 WORKDIR /simulation
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 

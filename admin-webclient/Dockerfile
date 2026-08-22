@@ -4,7 +4,7 @@ WORKDIR /admin-webclient
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
