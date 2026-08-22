@@ -22,6 +22,13 @@ async function connectDB() {
     client = await MongoClient.connect(dsn);
     db = client.db();
 
+    const originalClose = client.close.bind(client);
+    client.close = async (...args) => {
+        db = null;
+        client = null;
+        return originalClose(...args);
+    };
+
     console.log('Connected to the database');
 
     return {
