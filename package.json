@@ -1,6 +1,15 @@
 {
+  "private": true,
+  "workspaces": [
+    "backend",
+    "webclient",
+    "admin-webclient",
+    "mobileclient",
+    "simulation"
+  ],
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "npm test --workspaces"
   },
   "devDependencies": {
     "prettier": "^3.9.6"
