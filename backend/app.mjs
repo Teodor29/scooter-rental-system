@@ -1,45 +1,43 @@
-import 'dotenv/config';
+import "dotenv/config"
 
-import express from 'express';
-import swaggerUi from 'swagger-ui-express';
-import swaggerConfig from './config/swagger.mjs';
-import cors from 'cors';
-import customerRoutesV1 from './src/routes/v1/customer.mjs';
-import adminRoutesV1 from './src/routes/v1/admin.mjs';
-import scooterRoutesV1 from './src/routes/v1/scooters.mjs';
-import citiesRoutesV1 from './src/routes/v1/cities.mjs';
-import { authenticateApiKey } from './src/middleware/authApiKey.mjs';
-import { rateLimiter } from './src/middleware/rateLimit.mjs';
+import express from "express"
+import swaggerUi from "swagger-ui-express"
+import swaggerConfig from "./config/swagger.mjs"
+import cors from "cors"
+import customerRoutesV1 from "./src/routes/v1/customer.mjs"
+import adminRoutesV1 from "./src/routes/v1/admin.mjs"
+import scooterRoutesV1 from "./src/routes/v1/scooters.mjs"
+import citiesRoutesV1 from "./src/routes/v1/cities.mjs"
+import { authenticateApiKey } from "./src/middleware/authApiKey.mjs"
+import { rateLimiter } from "./src/middleware/rateLimit.mjs"
 
-const app = express();
-const PORT = process.env.PORT || 5001;
+const app = express()
+const PORT = process.env.PORT || 5001
 
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
-app.use(rateLimiter);
+app.use(rateLimiter)
 
 //Swagger documentation
 app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerConfig.swaggerSpec)
-);
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerConfig.swaggerSpec),
+)
 
-app.get('/', (req, res) => {
-    res.json({ hej: 'Hello World' });
-});
+app.get("/", (req, res) => {
+  res.json({ hej: "Hello World" })
+})
 
-app.use('/api/v1/customers', authenticateApiKey, customerRoutesV1);
-app.use('/api/v1/admins', authenticateApiKey, adminRoutesV1);
-app.use('/api/v1/scooters', authenticateApiKey, scooterRoutesV1);
-app.use('/api/v1/cities', authenticateApiKey, citiesRoutesV1);
+app.use("/api/v1/customers", authenticateApiKey, customerRoutesV1)
+app.use("/api/v1/admins", authenticateApiKey, adminRoutesV1)
+app.use("/api/v1/scooters", authenticateApiKey, scooterRoutesV1)
+app.use("/api/v1/cities", authenticateApiKey, citiesRoutesV1)
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(
-        `Documentation available at: http://localhost:${PORT}/api-docs`
-    );
-});
+  console.log(`Server is running on port ${PORT}`)
+  console.log(`Documentation available at: http://localhost:${PORT}/api-docs`)
+})
 
-export default { app };
+export default { app }
