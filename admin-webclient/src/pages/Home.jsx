@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { getAllScooters } from "../services/api/scooter"
+import { getAllCustomers } from "../services/api/customer"
 
 function Home({ isLoggedIn }) {
   // State variables
@@ -7,26 +8,11 @@ function Home({ isLoggedIn }) {
   const [customers, setCustomers] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const apiKey = import.meta.env.VITE_API_KEY
 
   useEffect(() => {
-    // Fetch scooters from the API
     const fetchScooter = async () => {
       try {
-        const response = await fetch(
-          `${baseUrl}/api/v1/scooters/all-scooters`,
-          {
-            headers: {
-              "x-api-key": apiKey,
-            },
-          },
-        )
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch scooters")
-        }
-        const data = await response.json()
+        const data = await getAllScooters()
         setScooters(data)
       } catch (error) {
         setError(error.message)
@@ -35,22 +21,9 @@ function Home({ isLoggedIn }) {
       }
     }
 
-    // Fetch customers from the API
     const fetchCustomer = async () => {
       try {
-        const response = await fetch(
-          `${baseUrl}/api/v1/customers/all-customers`,
-          {
-            headers: {
-              "x-api-key": apiKey,
-            },
-          },
-        )
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch customers")
-        }
-        const data = await response.json()
+        const data = await getAllCustomers()
         setCustomers(data)
       } catch (error) {
         setError(error.message)
@@ -69,7 +42,7 @@ function Home({ isLoggedIn }) {
     }, 10000)
 
     return () => clearInterval(interval)
-  }, [baseUrl])
+  }, [])
 
   // If the user is not logged in, show a message
   if (!isLoggedIn) {

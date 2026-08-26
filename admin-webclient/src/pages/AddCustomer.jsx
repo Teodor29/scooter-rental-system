@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { addCustomer } from "../services/api/customer"
 
 function AddCustomer() {
   // State variables
@@ -8,27 +9,13 @@ function AddCustomer() {
     lastName: "",
   })
   const [error, setError] = useState(null)
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const apiKey = import.meta.env.VITE_API_KEY
   const navigate = useNavigate()
 
   // Add a new customer
   const handleAddCustomer = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${baseUrl}/api/v1/customers/new-customer`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey,
-        },
-        body: JSON.stringify(newCustomer),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to add customer")
-      }
-
+      await addCustomer(newCustomer)
       navigate("/customers")
     } catch (error) {
       setError(error.message)

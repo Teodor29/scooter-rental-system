@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { getAllScooters, deleteScooter } from "../services/api/scooter"
 
 function Scooters({ isLoggedIn }) {
   // State variables
@@ -8,26 +9,11 @@ function Scooters({ isLoggedIn }) {
   const [loading, setLoading] = useState(true)
   const [expandedRows, setExpandedRows] = useState([])
   const [filter, setFilter] = useState("all")
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const apiKey = import.meta.env.VITE_API_KEY
 
   useEffect(() => {
-    // Fetch scooters from the API
     const fetchScooter = async () => {
       try {
-        const response = await fetch(
-          `${baseUrl}/api/v1/scooters/all-scooters`,
-          {
-            headers: {
-              "x-api-key": apiKey,
-            },
-          },
-        )
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch scooters")
-        }
-        const data = await response.json()
+        const data = await getAllScooters()
         setScooters(data)
       } catch (error) {
         setError(error.message)
@@ -44,7 +30,7 @@ function Scooters({ isLoggedIn }) {
     }, 10000)
 
     return () => clearInterval(interval)
-  }, [baseUrl])
+  }, [])
 
   // Handle row expansion to show more details
   const handleExpand = (scooterId) => {
@@ -57,21 +43,7 @@ function Scooters({ isLoggedIn }) {
   // Delete scooter by id
   const handleDelete = async (scooterId) => {
     try {
-      const response = await fetch(
-        `${baseUrl}/api/v1/scooters/delete-one-scooter`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-          },
-          body: JSON.stringify({ _id: scooterId }),
-        },
-      )
-
-      if (!response.ok) {
-        throw new Error("Failed to delete scooter")
-      }
+      await deleteScooter(scooterId)
 
       // Update the state to remove the deleted scooter
       setScooters({

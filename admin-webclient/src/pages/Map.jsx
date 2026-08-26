@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import {
   MapContainer,
   TileLayer,
@@ -12,6 +12,8 @@ import L from "leaflet"
 import "leaflet/dist/leaflet.css" // Import Leaflet CSS
 import { TbScooter } from "react-icons/tb"
 import ReactDOMServer from "react-dom/server"
+import { getAllScooters, deleteScooter } from "../services/api/scooter"
+import { getAllCities } from "../services/api/city"
 
 function Map({ isLoggedIn }) {
   // State variables
@@ -21,26 +23,11 @@ function Map({ isLoggedIn }) {
   const [filter, setFilter] = useState("all")
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const apiKey = import.meta.env.VITE_API_KEY
 
   useEffect(() => {
-    // Fetch scooters from the API
     const fetchScooter = async () => {
       try {
-        const response = await fetch(
-          `${baseUrl}/api/v1/scooters/all-scooters`,
-          {
-            headers: {
-              "x-api-key": apiKey,
-            },
-          },
-        )
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch scooters")
-        }
-        const data = await response.json()
+        const data = await getAllScooters()
         setScooters(data)
       } catch (error) {
         setError(error.message)
@@ -49,19 +36,9 @@ function Map({ isLoggedIn }) {
       }
     }
 
-    // Fetch cities from the API
     const fetchCities = async () => {
       try {
-        const response = await fetch(`${baseUrl}/api/v1/cities/all-cities`, {
-          headers: {
-            "x-api-key": apiKey,
-          },
-        })
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch cities")
-        }
-        const data = await response.json()
+        const data = await getAllCities()
         setCities(data)
         setSelectedCity(data.data[0])
       } catch (error) {
@@ -80,7 +57,7 @@ function Map({ isLoggedIn }) {
     }, 10000)
 
     return () => clearInterval(interval)
-  }, [baseUrl])
+  }, [])
 
   const handleCityChange = (event) => {
     const cityId = event.target.value
@@ -105,21 +82,7 @@ function Map({ isLoggedIn }) {
 
   const handleDelete = async (scooterId) => {
     try {
-      const response = await fetch(
-        `${baseUrl}/api/v1/scooters/delete-one-scooter`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-          },
-          body: JSON.stringify({ _id: scooterId }),
-        },
-      )
-
-      if (!response.ok) {
-        throw new Error("Failed to delete scooter")
-      }
+      await deleteScooter(scooterId)
 
       // Update the state to remove the deleted scooter
       setScooters({

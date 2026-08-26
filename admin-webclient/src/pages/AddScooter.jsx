@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { addScooter } from "../services/api/scooter"
 
 function AddScooter() {
   // State variables
@@ -9,27 +10,13 @@ function AddScooter() {
     battery: 100,
   })
   const [error, setError] = useState(null)
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const apiKey = import.meta.env.VITE_API_KEY
   const navigate = useNavigate()
 
   // Add a new scooter
   const handleAddScooter = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch(`${baseUrl}/api/v1/scooters/new-scooter`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey,
-        },
-        body: JSON.stringify(newScooter),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to add scooter")
-      }
-
+      await addScooter(newScooter)
       navigate("/scooters")
     } catch (error) {
       setError(error.message)

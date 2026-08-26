@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { getCustomer } from "../services/api/customer"
 
 const CustomerContext = createContext()
 
@@ -8,7 +9,6 @@ export const CustomerProvider = ({ customerId, children }) => {
   const [customer, setCustomer] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const baseUrl = import.meta.env.VITE_MOCK_API_URL
 
   useEffect(() => {
     if (!customerId) {
@@ -17,15 +17,10 @@ export const CustomerProvider = ({ customerId, children }) => {
       return
     }
 
-    // Fetch customer from the API
     const fetchCustomer = async () => {
       try {
-        const response = await fetch(`${baseUrl}/customers?_id=${customerId}`)
-        if (!response.ok) {
-          throw new Error("Failed to fetch customer")
-        }
-        const data = await response.json()
-        setCustomer(data[0])
+        const data = await getCustomer(customerId)
+        setCustomer(data)
       } catch (error) {
         setError(error.message)
       } finally {
@@ -34,7 +29,7 @@ export const CustomerProvider = ({ customerId, children }) => {
     }
 
     fetchCustomer()
-  }, [customerId, baseUrl])
+  }, [customerId])
 
   return (
     <CustomerContext.Provider value={{ customer, error, loading }}>

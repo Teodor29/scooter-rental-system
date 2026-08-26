@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { getAllCustomers, deleteCustomer } from "../services/api/customer"
 
 function Customers({ isLoggedIn }) {
   // State variables
@@ -8,26 +9,11 @@ function Customers({ isLoggedIn }) {
   const [loading, setLoading] = useState(true)
   const [expandedRows, setExpandedRows] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const apiKey = import.meta.env.VITE_API_KEY
 
   useEffect(() => {
-    // Fetch customers from the API
-    const fetchCustomer = async () => {
+    const fetchCustomers = async () => {
       try {
-        const response = await fetch(
-          `${baseUrl}/api/v1/customers/all-customers`,
-          {
-            headers: {
-              "x-api-key": apiKey,
-            },
-          },
-        )
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch customers")
-        }
-        const data = await response.json()
+        const data = await getAllCustomers()
         setCustomers(data)
       } catch (error) {
         setError(error.message)
@@ -36,8 +22,8 @@ function Customers({ isLoggedIn }) {
       }
     }
 
-    fetchCustomer()
-  }, [baseUrl])
+    fetchCustomers()
+  }, [])
 
   // Handle row expansion to show more details
   const handleExpand = (customerId) => {
@@ -50,21 +36,7 @@ function Customers({ isLoggedIn }) {
   // Delete customer by id
   const handleDelete = async (customerId) => {
     try {
-      const response = await fetch(
-        `${baseUrl}/api/v1/customers/delete-one-customer`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-          },
-          body: JSON.stringify({ _id: customerId }),
-        },
-      )
-
-      if (!response.ok) {
-        throw new Error("Failed to delete customer")
-      }
+      await deleteCustomer(customerId)
 
       // Update the state to remove the deleted customer
       setCustomers({
@@ -79,8 +51,8 @@ function Customers({ isLoggedIn }) {
   const filteredCustomers = customers
     ? customers.data.filter(
         (customer) =>
-          customer.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          customer.lastName.toLowerCase().includes(searchTerm.toLowerCase()),
+          (customer.firstName ?? "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (customer.lastName ?? "").toLowerCase().includes(searchTerm.toLowerCase()),
       )
     : []
 

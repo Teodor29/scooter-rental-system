@@ -1,13 +1,13 @@
 import { useLocation, Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
-import React from "react"
+import { formatDate } from "../utils/date"
 
 function HistoryDetails() {
   const location = useLocation()
   const { rental } = location.state
 
   return (
-    <div className="main-content profile-content">
+    <div className="main-content">
       <div className="page-header">
         <Link to="/history">
           <FaArrowLeft className="back" />
@@ -18,7 +18,7 @@ function HistoryDetails() {
         <ul className="details-list">
           <li>
             <span>Date:</span>
-            <span>{new Date(rental.endTime).toLocaleDateString()}</span>
+            <span>{formatDate(rental.endTime)}</span>
           </li>
           <li>
             <span>Duration:</span>

@@ -1,7 +1,7 @@
 import { useCustomer } from "../context/CustomerContext"
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
-import React from "react"
+import { formatDate } from "../utils/date"
 
 function History() {
   const { customer, error, loading } = useCustomer()
@@ -30,7 +30,7 @@ function History() {
                     {rental.durationMinutes} min
                   </span>
                   <span className="history-date">
-                    {new Date(rental.endTime).toLocaleDateString()}
+                    {formatDate(rental.endTime)}
                   </span>
                 </div>
                 <span className="history-cost">{rental.cost} Kr</span>
