@@ -1,5 +1,8 @@
 import database from "../../db/database.mjs"
 import { ObjectId } from "mongodb"
+import bcrypt from "bcrypt"
+
+const SALT_ROUNDS = 10
 
 const admins = {
   getAllAdmins: async function getAllAdmins() {
@@ -38,12 +41,34 @@ const admins = {
     }
   },
 
+  getAdminByUsername: async function getAdminByUsername(username) {
+    let db
+
+    try {
+      const db = await database.getCollection("admins")
+      const result = await db.collection.findOne({ username })
+
+      return result
+    } catch (error) {
+      console.error("Error fetching admin by username:", error)
+      throw new Error("Failed to fetch admin data")
+    } finally {
+      if (db) {
+        await db.client.close()
+      }
+    }
+  },
+
   newAdmin: async function newAdmin(data) {
     let db
 
     try {
       const db = await database.getCollection("admins")
-      const result = await db.collection.insertOne(data)
+      const hashedPassword = await bcrypt.hash(data.password, SALT_ROUNDS)
+      const result = await db.collection.insertOne({
+        ...data,
+        password: hashedPassword,
+      })
 
       return result
     } catch (error) {

@@ -47,27 +47,26 @@ a {
   color: variables.$text-link;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   background-color: variables.$background2;
   color: variables.$text-primary;
   font-size: 1rem;
   margin-bottom: 1rem;
-  padding: 0.75rem;
-  border: none;
+  padding: 0.5rem;
+  border: 1px solid variables.$button-outline-color;
   border-radius: 0.5rem;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-    background-color: variables.$background3;
-  }
 }
 
 select {
   font-size: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: none;
+  border: 1px solid variables.$button-outline-color;
   background-color: variables.$background2;
   color: variables.$text-primary;
 

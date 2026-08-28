@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getAllCustomers, deleteCustomer } from "../services/api/customer"
 
-function Customers({ isLoggedIn }) {
+function Customers() {
   // State variables
   const [customers, setCustomers] = useState(null)
   const [error, setError] = useState(null)
@@ -55,15 +55,6 @@ function Customers({ isLoggedIn }) {
           (customer.lastName ?? "").toLowerCase().includes(searchTerm.toLowerCase()),
       )
     : []
-
-  // Show a message if the user is not logged in
-  if (!isLoggedIn) {
-    return (
-      <div className="customers">
-        <h2>Please log in to view this page.</h2>
-      </div>
-    )
-  }
 
   return (
     <div className="customers">

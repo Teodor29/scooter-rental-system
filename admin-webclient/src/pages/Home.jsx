@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllScooters } from "../services/api/scooter"
 import { getAllCustomers } from "../services/api/customer"
 
-function Home({ isLoggedIn }) {
+function Home() {
   // State variables
   const [scooters, setScooters] = useState(null)
   const [customers, setCustomers] = useState(null)
@@ -43,15 +43,6 @@ function Home({ isLoggedIn }) {
 
     return () => clearInterval(interval)
   }, [])
-
-  // If the user is not logged in, show a message
-  if (!isLoggedIn) {
-    return (
-      <div className="overview">
-        <h2>Please log in to view this page.</h2>
-      </div>
-    )
-  }
 
   return (
     <div className="overview">

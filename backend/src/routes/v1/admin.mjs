@@ -1,7 +1,38 @@
 import express from "express"
+import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt"
 import admins from "../../controllers/adminController.mjs"
 
 const router = express.Router()
+
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body
+
+  try {
+    const admin = await admins.getAdminByUsername(username)
+
+    if (!admin) {
+      return res.status(401).json({ message: "Invalid username or password." })
+    }
+
+    const passwordIsCorrect = await bcrypt.compare(password, admin.password)
+
+    if (!passwordIsCorrect) {
+      return res.status(401).json({ message: "Invalid username or password." })
+    }
+
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    })
+
+    res.status(200).json({
+      token,
+    })
+  } catch (error) {
+    console.error("Error during login:", error)
+    res.status(500).json({ message: "Login failed", details: error.message })
+  }
+})
 
 router.get("/all-admins", async (req, res) => {
   try {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getAllScooters, deleteScooter } from "../services/api/scooter"
 
-function Scooters({ isLoggedIn }) {
+function Scooters() {
   // State variables
   const [scooters, setScooters] = useState(null)
   const [error, setError] = useState(null)
@@ -69,15 +69,6 @@ function Scooters({ isLoggedIn }) {
         return true
       })
     : []
-
-  // Show a message if the user is not logged in
-  if (!isLoggedIn) {
-    return (
-      <div className="scooters">
-        <h2>Please log in to view this page.</h2>
-      </div>
-    )
-  }
 
   return (
     <div className="scooters">

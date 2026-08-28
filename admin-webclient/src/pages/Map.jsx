@@ -15,7 +15,7 @@ import ReactDOMServer from "react-dom/server"
 import { getAllScooters, deleteScooter } from "../services/api/scooter"
 import { getAllCities } from "../services/api/city"
 
-function Map({ isLoggedIn }) {
+function Map() {
   // State variables
   const [scooters, setScooters] = useState(null)
   const [cities, setCities] = useState(null)
@@ -121,14 +121,6 @@ function Map({ isLoggedIn }) {
     const map = useMap()
     map.setView(center)
     return null
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <div className="map">
-        <h2>Please log in to view this page.</h2>
-      </div>
-    )
   }
 
   return (
