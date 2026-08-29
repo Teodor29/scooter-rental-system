@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "format": "prettier --write .",
-    "test": "npm test --workspaces"
+    "test": "npm test --workspaces",
+    "seed": "npm run seed --workspace=simulation"
   },
   "devDependencies": {
     "prettier": "^3.9.6"

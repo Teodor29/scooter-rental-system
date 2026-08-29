@@ -5,9 +5,13 @@ import database from "./modules/db.js"
 import customer_db from "./modules/customer_db.js"
 import scooter_db from "./modules/scooter_db.js"
 import cities from "./modules/cities_db.js"
+import bcrypt from "bcrypt"
 import { faker } from "@faker-js/faker"
 
-// Collections: [ 'apiKeys', 'customers', 'cities_locations', 'scooters' ]
+// Collections: [ 'admins', 'customers', 'cities_locations', 'scooters' ]
+
+const ADMIN_USERNAME = "admin"
+const ADMIN_PASSWORD = "admin"
 
 //set up the objects
 export const randomUser = {
@@ -141,7 +145,7 @@ export async function count(collectionName) {
 }
 
 export async function addMultipleScootersRotatingCities(number) {
-  const citiesList = ["Malmö", "Växjö", "Karlskrona centrum"]
+  const citiesList = (await cities.getAllCities()).map((c) => c.city)
   for (let i = 0; i < number; i++) {
     const city = citiesList[i % citiesList.length]
     const newScooter = {
@@ -160,9 +164,30 @@ export async function addMultipleScootersRotatingCities(number) {
     )
   }
 
+  console.log(`${number} scooters have been added across ${citiesList.join(", ")}.`)
+}
+
+export async function seedAll(scooterCount = 30, customerCount = 10) {
+  const cityCount = await cities.importCitiesFromFile()
+
+  await deleteAll("scooters")
+  await deleteAll("customers")
+  await deleteAll("admins")
+
+  await addMultipleScootersRotatingCities(scooterCount)
+  await addMultipleCustomers(customerCount)
+
+  const { collection, client } = await database.getCollection("admins")
+  await collection.insertOne({
+    username: ADMIN_USERNAME,
+    password: await bcrypt.hash(ADMIN_PASSWORD, 10),
+  })
+  await client.close()
+
   console.log(
-    `${number} scooters have been added across Malmö, Växjö, and Karlskrona Centrum.`,
+    `Seeded ${cityCount} cities, ${scooterCount} scooters, ${customerCount} customers.`,
   )
+  console.log(`Admin username: "${ADMIN_USERNAME}", password: "${ADMIN_PASSWORD}"`)
 }
 
 //this function will be called
@@ -223,6 +248,12 @@ async function utils() {
       break
     case "resetScooters":
       await resetAllScooters()
+      break
+    case "seedAll":
+      await seedAll(
+        args[1] ? parseInt(args[1], 10) : undefined,
+        args[2] ? parseInt(args[2], 10) : undefined,
+      )
       break
   }
 }

@@ -5,7 +5,7 @@
     "driveZone": {
       "latitude": 56.89205,
       "longitude": 14.79823,
-      "radius_km2": 11.19
+      "radius_km2": 8
     },
     "parkZones": [
       {
@@ -62,11 +62,11 @@
   },
   {
     "id": 2,
-    "city": "Karlskrona centrum",
+    "city": "Karlskrona",
     "driveZone": {
       "latitude": 56.16206,
       "longitude": 15.58834,
-      "radius_km2": 0.61
+      "radius_km2": 5
     },
     "parkZones": [
       {
@@ -127,7 +127,7 @@
     "driveZone": {
       "latitude": 55.57582,
       "longitude": 13.00644,
-      "radius_km2": 46.62
+      "radius_km2": 10
     },
     "parkZones": [
       {
@@ -157,12 +157,14 @@
       {
         "name": "Park zone 5",
         "latitude": 55.57487,
-        "longitude": 12.99909
+        "longitude": 12.99909,
+        "radius_km2": 0.01
       },
       {
         "name": "Park zone 6",
         "latitude": 55.58038,
-        "longitude": 13.01669
+        "longitude": 13.01669,
+        "radius_km2": 0.01
       }
     ],
     "chargingZones": [
@@ -188,6 +190,49 @@
         "name": "Charging zone 4",
         "latitude": 55.57994,
         "longitude": 12.9717,
+        "radius_km2": 0.01
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "city": "Stockholm",
+    "driveZone": {
+      "latitude": 59.3293,
+      "longitude": 18.0686,
+      "radius_km2": 10
+    },
+    "parkZones": [
+      {
+        "name": "Park zone 1",
+        "latitude": 59.33258,
+        "longitude": 18.0649,
+        "radius_km2": 0.01
+      },
+      {
+        "name": "Park zone 2",
+        "latitude": 59.32893,
+        "longitude": 18.0715,
+        "radius_km2": 0.01
+      },
+      {
+        "name": "Park zone 3",
+        "latitude": 59.32688,
+        "longitude": 18.0677,
+        "radius_km2": 0.01
+      }
+    ],
+    "chargingZones": [
+      {
+        "name": "Charging zone 1",
+        "latitude": 59.33123,
+        "longitude": 18.0708,
+        "radius_km2": 0.01
+      },
+      {
+        "name": "Charging zone 2",
+        "latitude": 59.32745,
+        "longitude": 18.0654,
         "radius_km2": 0.01
       }
     ]

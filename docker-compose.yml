@@ -57,14 +57,5 @@ services:
       - elsparkcyklar
     env_file:
       - .env
-
-  mock-api:
-    container_name: mock-api
-    build:
-      context: ./mock-api
-    ports:
-      - "4000:4000"
-    networks:
-      - elsparkcyklar
-    env_file:
-      - .env
+    volumes:
+      - ./city-data:/city-data:ro

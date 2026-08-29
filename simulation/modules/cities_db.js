@@ -1,9 +1,22 @@
 import dotenv from "dotenv"
 dotenv.config()
 
+import fs from "fs"
 import database from "./db.js"
 
 const collectionName = "cities_locations"
+const CITY_DATA_PATH = new URL("../../city-data/city-data.json", import.meta.url)
+
+async function importCitiesFromFile() {
+  const citiesData = JSON.parse(fs.readFileSync(CITY_DATA_PATH, "utf-8"))
+  const db = await database.getCollection(collectionName)
+
+  await db.collection.deleteMany({})
+  await db.collection.insertMany(citiesData)
+  await db.client.close()
+
+  return citiesData.length
+}
 
 async function getAllCities() {
   try {
@@ -90,6 +103,7 @@ async function getRandomCityCoordinates(cityName) {
 }
 
 export default {
+  importCitiesFromFile,
   getAllCities,
   getCityData,
   getParkingZones,
