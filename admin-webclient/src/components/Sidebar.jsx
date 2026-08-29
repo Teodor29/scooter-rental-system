@@ -3,20 +3,12 @@ import { Link } from "react-router-dom"
 function Sidebar() {
   return (
     <div className="sidebar">
-      <ul className="sidebar-menu">
-        <li>
+      <div className="sidebar-menu">
           <Link to="/">Overview</Link>
-        </li>
-        <li>
           <Link to="/map">Map</Link>
-        </li>
-        <li>
           <Link to="/scooters">Scooters</Link>
-        </li>
-        <li>
           <Link to="/customers">Customers</Link>
-        </li>
-      </ul>
+      </div>
     </div>
   )
 }

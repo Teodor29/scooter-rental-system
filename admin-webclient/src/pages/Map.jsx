@@ -5,11 +5,10 @@ import {
   Marker,
   Popup,
   Circle,
-  Rectangle,
   useMap,
 } from "react-leaflet"
 import L from "leaflet"
-import "leaflet/dist/leaflet.css" // Import Leaflet CSS
+import "leaflet/dist/leaflet.css"
 import { TbScooter } from "react-icons/tb"
 import ReactDOMServer from "react-dom/server"
 import { getAllScooters, deleteScooter } from "../services/api/scooter"
@@ -126,10 +125,10 @@ function Map() {
   return (
     <div className="map">
       {loading && <h2>Loading...</h2>}
-      {error && <p>{error}</p>}
+      {error && <p className="error-msg">{error}</p>}
       {cities && (
         <div className="page-header">
-          <h1>Map</h1>
+          <h2>Map</h2>
           <div className="map-options">
             <label htmlFor="city-select">Choose a city:</label>
             <select id="city-select" onChange={handleCityChange}>

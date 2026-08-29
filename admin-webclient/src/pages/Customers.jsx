@@ -63,7 +63,7 @@ function Customers() {
   return (
     <div className="customers">
       <div className="page-header">
-        <h1>Customers</h1>
+        <h2>Customers</h2>
         <Link to="/add-customer">
           <button>Add Customer</button>
         </Link>

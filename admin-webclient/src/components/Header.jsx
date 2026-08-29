@@ -7,7 +7,7 @@ function Header() {
   return (
     <div className="header">
       <h1>
-        <Link to="/">admin webbklient</Link>
+        <Link to="/">Admin Dashboard</Link>
       </h1>
       <div className="buttons">
         {isLoggedIn && (

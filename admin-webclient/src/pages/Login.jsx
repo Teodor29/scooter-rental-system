@@ -52,7 +52,7 @@ function Login() {
           autoComplete="current-password"
           required
         />
-        {error && <p className="login-error">{error}</p>}
+        {error && <p className="error-msg center">{error}</p>}
         <button className="login-button" type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Log in"}
         </button>

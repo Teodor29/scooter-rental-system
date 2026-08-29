@@ -1,26 +1,20 @@
 @use "variables";
 
 .sidebar {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  height: 100%;
-  width: 200px;
   background-color: variables.$background-sidebar;
-  ul {
-    list-style: none;
-    padding: 1rem 2rem;
-  }
+}
 
-  li {
-    margin: 1rem 0;
-  }
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+}
 
-  a {
-    color: variables.$text-primary;
-    font-size: large;
-    &:hover {
-      color: variables.$text-secondary;
-    }
+.sidebar-menu a {
+  padding: 0.5rem 2rem;
+  color: variables.$text-primary;
+  font-size: large;
+  &:hover {
+    color: variables.$text-secondary;
   }
 }

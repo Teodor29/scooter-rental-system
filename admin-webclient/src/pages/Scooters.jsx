@@ -73,7 +73,7 @@ function Scooters() {
   return (
     <div className="scooters">
       <div className="page-header">
-        <h1>Scooters</h1>
+        <h2>Scooters</h2>
         <Link to="/add-scooter">
           <button>Add scooter</button>
         </Link>

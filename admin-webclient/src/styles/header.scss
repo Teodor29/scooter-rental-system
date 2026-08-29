@@ -1,11 +1,7 @@
 @use "variables";
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  flex-shrink: 0;
   background-color: variables.$background-navbar;
   color: variables.$text-primary;
   padding: 1rem 2rem;
@@ -29,12 +25,6 @@
       margin-left: 1rem;
     }
   }
-}
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .logout-button {

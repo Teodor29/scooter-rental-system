@@ -17,22 +17,24 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Header />
-        <Sidebar />
-        <div className="main">
-          <div className="main-content">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="/" element={<Home />} />
-                <Route path="*" element={<Home />} />
-                <Route path="/map" element={<Map />} />
-                <Route path="/scooters" element={<Scooters />} />
-                <Route path="/customers" element={<Customers />} />
-                <Route path="/add-customer" element={<AddCustomer />} />
-                <Route path="/add-scooter" element={<AddScooter />} />
-              </Route>
-            </Routes>
+        <div className="app">
+          <Header />
+          <div className="app-body">
+            <Sidebar />
+            <main className="main-content">
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="*" element={<Home />} />
+                  <Route path="/map" element={<Map />} />
+                  <Route path="/scooters" element={<Scooters />} />
+                  <Route path="/customers" element={<Customers />} />
+                  <Route path="/add-customer" element={<AddCustomer />} />
+                  <Route path="/add-scooter" element={<AddScooter />} />
+                </Route>
+              </Routes>
+            </main>
           </div>
         </div>
       </Router>
