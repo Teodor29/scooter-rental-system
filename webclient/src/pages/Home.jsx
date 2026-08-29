@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
-function Home({ isLoggedIn, handleLogin, handleLogout }) {
+function Home() {
+  const { isLoggedIn } = useAuth()
+
   return (
     <div className="home">
       <div className="home-container">

@@ -1,5 +1,8 @@
 import database from "../../db/database.mjs"
 import { ObjectId } from "mongodb"
+import bcrypt from "bcrypt"
+
+const SALT_ROUNDS = 10
 
 const customers = {
   getAllCustomers: async function getAllCustomers() {
@@ -27,24 +30,44 @@ const customers = {
       const db = await database.getCollection("customers")
       const result = await db.collection
         .aggregate([
-          {
-            $match: { _id: new ObjectId(id) },
-          },
+          { $match: { _id: new ObjectId(id) } },
           {
             $lookup: {
               from: "rentals",
-              localField: "_id",
-              foreignField: "customerId",
-              as: "rentals",
+              let: { customerId: "$_id" },
+              pipeline: [
+                { $match: { $expr: { $eq: ["$customerId", "$$customerId"] } } },
+                { $sort: { endTime: -1 } },
+              ],
+              as: "rentalHistory",
             },
           },
+          { $project: { password: 0 } },
         ])
         .toArray()
 
-      return result
+      return result[0] || null
     } catch (error) {
       console.error("Error fetching customer:", error)
       throw new Error("Failed to fetch customer")
+    } finally {
+      if (db) {
+        await db.client.close()
+      }
+    }
+  },
+
+  getCustomerByEmail: async function getCustomerByEmail(email) {
+    let db
+
+    try {
+      const db = await database.getCollection("customers")
+      const result = await db.collection.findOne({ email })
+
+      return result
+    } catch (error) {
+      console.error("Error fetching customer by email:", error)
+      throw new Error("Failed to fetch customer data")
     } finally {
       if (db) {
         await db.client.close()
@@ -57,7 +80,12 @@ const customers = {
 
     try {
       const db = await database.getCollection("customers")
-      const result = await db.collection.insertOne(data)
+      const hashedPassword = await bcrypt.hash(data.password, SALT_ROUNDS)
+      const result = await db.collection.insertOne({
+        balance: 0,
+        ...data,
+        password: hashedPassword,
+      })
 
       return result
     } catch (error) {

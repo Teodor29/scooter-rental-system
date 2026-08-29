@@ -1,7 +1,10 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { MdAccountCircle } from "react-icons/md"
+import { useAuth } from "../context/AuthContext"
 
-function Header({ isLoggedIn, handleLogout }) {
+function Header() {
+  const { isLoggedIn, logout } = useAuth()
+
   return (
     <div className="header">
       <h1>
@@ -10,7 +13,7 @@ function Header({ isLoggedIn, handleLogout }) {
       <div className="buttons">
         {isLoggedIn ? (
           <>
-            <Link to="/" onClick={handleLogout} className="logout-button">
+            <Link to="/" onClick={logout} className="logout-button">
               Log out
             </Link>
             <Link to="/profile" className="profile-icon">

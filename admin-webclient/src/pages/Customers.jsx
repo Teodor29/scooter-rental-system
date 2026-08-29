@@ -51,8 +51,12 @@ function Customers() {
   const filteredCustomers = customers
     ? customers.data.filter(
         (customer) =>
-          (customer.firstName ?? "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (customer.lastName ?? "").toLowerCase().includes(searchTerm.toLowerCase()),
+          (customer.firstName ?? "")
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          (customer.lastName ?? "")
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()),
       )
     : []
 

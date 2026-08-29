@@ -1,39 +1,54 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { getCustomer } from "../services/api/customer"
+import { useAuth } from "./AuthContext"
 
-const CustomerContext = createContext()
+const CustomerContext = createContext(null)
 
-export const useCustomer = () => useContext(CustomerContext)
+export function CustomerProvider({ children }) {
+  const { isLoggedIn } = useAuth()
 
-export const CustomerProvider = ({ customerId, children }) => {
   const [customer, setCustomer] = useState(null)
-  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (!customerId) {
-      setError("Customer ID is required")
+    if (!isLoggedIn) {
+      setCustomer(null)
       setLoading(false)
       return
     }
 
-    const fetchCustomer = async () => {
+    async function fetchCustomer() {
       try {
-        const data = await getCustomer(customerId)
+        setLoading(true)
+        setError(null)
+
+        const data = await getCustomer()
+
         setCustomer(data)
       } catch (error) {
-        setError(error.message)
+        setError(error)
       } finally {
         setLoading(false)
       }
     }
 
     fetchCustomer()
-  }, [customerId])
+  }, [isLoggedIn])
 
   return (
-    <CustomerContext.Provider value={{ customer, error, loading }}>
+    <CustomerContext.Provider
+      value={{
+        customer,
+        loading,
+        error,
+      }}
+    >
       {children}
     </CustomerContext.Provider>
   )
+}
+
+export function useCustomer() {
+  return useContext(CustomerContext)
 }

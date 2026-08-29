@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
+import { useAuth } from "../context/AuthContext"
 import { useCustomer } from "../context/CustomerContext"
 
-function Account({ onLogout }) {
-  const { customer, error, loading } = useCustomer()
+function Account() {
+  const { logout } = useAuth()
+  const { customer, loading, error } = useCustomer()
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
     lastName: "",
@@ -77,7 +79,7 @@ function Account({ onLogout }) {
       </div>
       <div className="page-footer">
         <Link to="/">
-          <button onClick={onLogout}>Logout</button>
+          <button onClick={logout}>Logout</button>
         </Link>
         <Link to="/">
           <button className="delete-button">Delete Account</button>

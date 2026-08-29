@@ -1,5 +1,9 @@
 @use "variables";
 
+.login-error {
+  color: variables.$color-red;
+}
+
 .login {
   text-align: center;
   margin: 0 auto;

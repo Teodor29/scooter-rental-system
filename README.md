@@ -10,10 +10,10 @@ I was primarily responsible for the frontend development and Docker-based contai
 
 ## Tech Stack
 
-* **Frontend:** React, JavaScript
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB
-* **Tools:** Docker
+- **Frontend:** React, JavaScript
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Tools:** Docker
 
 ## Project Structure
 
@@ -42,7 +42,7 @@ cd scooter-rental-system
 Create a `.env` file in the root directory `scooter-rental-system` from `.env.example`
 
 3. Build and Start the System with Docker Compose
- 
+
 ```bash
 docker compose up --build
 ```

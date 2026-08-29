@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import { useState } from "react"
 import "./styles/main.scss"
+import { AuthProvider } from "./context/AuthContext"
+import { CustomerProvider } from "./context/CustomerContext"
+import ProtectedRoute from "./components/ProtectedRoute"
 import Navbar from "./components/Navbar"
 import Map from "./pages/Map"
 import Scan from "./pages/Scan"
@@ -12,30 +14,17 @@ import Wallet from "./pages/Wallet"
 import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
 import AddFunds from "./pages/AddFunds"
-import { CustomerProvider } from "./context/CustomerContext"
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const customerId = 1
-
-  // handle login
-  const handleLogin = (event) => {
-    event.preventDefault()
-    setIsLoggedIn(true)
-  }
-
-  // handle logout
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-  }
-
   return (
-    <CustomerProvider customerId={customerId}>
-      <Router>
-        <div className="main">
-          <Routes>
-            {isLoggedIn ? (
-              <>
+    <AuthProvider>
+      <CustomerProvider>
+        <Router>
+          <div className="main">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route element={<ProtectedRoute />}>
                 <Route
                   path="/"
                   element={
@@ -72,29 +61,17 @@ function App() {
                     </>
                   }
                 />
-                <Route
-                  path="/account"
-                  element={<Account onLogout={handleLogout} />}
-                />
+                <Route path="/account" element={<Account />} />
                 <Route path="/wallet" element={<Wallet />} />
                 <Route path="/history" element={<History />} />
                 <Route path="/history-details" element={<HistoryDetails />} />
                 <Route path="/add-funds" element={<AddFunds />} />
-              </>
-            ) : (
-              <>
-                <Route
-                  path="/login"
-                  element={<Login onLogin={handleLogin} />}
-                />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="*" element={<Login onLogin={handleLogin} />} />
-              </>
-            )}
-          </Routes>
-        </div>
-      </Router>
-    </CustomerProvider>
+              </Route>
+            </Routes>
+          </div>
+        </Router>
+      </CustomerProvider>
+    </AuthProvider>
   )
 }
 

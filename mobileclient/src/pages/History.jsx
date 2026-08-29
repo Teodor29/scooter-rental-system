@@ -4,7 +4,6 @@ import { FaArrowLeft } from "react-icons/fa6"
 import { formatDate } from "../utils/date"
 
 function History() {
-  // Get customer info
   const { customer, error, loading } = useCustomer()
 
   return (
@@ -17,7 +16,7 @@ function History() {
       </div>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {customer && (
+      {customer.rentalHistory.length > 0 ? (
         <ul className="history-list">
           {customer.rentalHistory.map((rental) => (
             <li key={rental._id}>
@@ -39,6 +38,8 @@ function History() {
             </li>
           ))}
         </ul>
+      ) : (
+        <p className="center">No rental history available.</p>
       )}
     </div>
   )

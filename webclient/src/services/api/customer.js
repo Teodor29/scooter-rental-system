@@ -1,6 +1,20 @@
 import api from "./client"
 
-export async function getCustomer(customerId) {
-  const response = await api.get(`/api/v1/customers/customer/${customerId}`)
-  return response.data.data[0]
+export async function getCustomer() {
+  const response = await api.get("/api/v1/customers/me")
+  console.log("getCustomer response", response)
+  return response.data
+}
+
+export async function loginCustomer(email, password) {
+  const response = await api.post("/api/v1/customers/login", {
+    email,
+    password,
+  })
+  return response.data
+}
+
+export async function addCustomer(customer) {
+  const response = await api.post("/api/v1/customers/new-customer", customer)
+  return response.data
 }

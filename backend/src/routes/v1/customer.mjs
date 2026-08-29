@@ -1,7 +1,62 @@
 import express from "express"
+import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt"
 import customers from "../../controllers/customerController.mjs"
+import { authenticate } from "../../middleware/authenticate.mjs"
 
 const router = express.Router()
+
+router.get("/me", authenticate, async (req, res) => {
+  console.log("req.customerId", req.customerId)
+  try {
+    const customer = await customers.getCustomer(req.customerId)
+
+    if (!customer) {
+      return res.status(404).json({ message: "Customer not found" })
+    }
+
+    res.status(200).json(customer)
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch customer data",
+      error: error.message,
+    })
+  }
+})
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body
+
+  try {
+    const customer = await customers.getCustomerByEmail(email)
+
+    if (!customer || !customer.password) {
+      return res.status(401).json({ message: "Invalid email or password." })
+    }
+
+    const passwordIsCorrect = await bcrypt.compare(password, customer.password)
+
+    if (!passwordIsCorrect) {
+      return res.status(401).json({ message: "Invalid email or password." })
+    }
+
+    const token = jwt.sign(
+      { customerId: customer._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      },
+    )
+
+    res.status(200).json({
+      token,
+      customer,
+    })
+  } catch (error) {
+    console.error("Error during login:", error)
+    res.status(500).json({ message: "Login failed", details: error.message })
+  }
+})
 
 /**
  * @swagger
@@ -132,11 +187,15 @@ router.get("/all-customers", async (req, res) => {
  */
 router.post("/new-customer", async (req, res) => {
   const data = req.body
-  // if (!data.firstName || !data.lastName) {
-  //     return res.status(400).json({ error: 'Full name is required' });
-  // }
 
   try {
+    const customer = await customers.getCustomerByEmail(data.email)
+    if (customer) {
+      return res
+        .status(400)
+        .json({ error: "Customer with this email already exists." })
+    }
+
     const result = await customers.addCustomer(data)
     res.status(200).json({
       message: "Data received and inserted",
