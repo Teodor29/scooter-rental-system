@@ -140,6 +140,8 @@ router.get("/all-customers", async (req, res) => {
  *             required:
  *               - firstName
  *               - lastName
+ *               - email
+ *               - password
  *             properties:
  *               firstName:
  *                 type: string
@@ -147,9 +149,17 @@ router.get("/all-customers", async (req, res) => {
  *               lastName:
  *                 type: string
  *                 description: Last name of the customer
+ *               email:
+ *                 type: string
+ *                 description: Email of the customer
+ *               password:
+ *                 type: string
+ *                 description: Password of the customer
  *             example:
  *               firstName: "John"
  *               lastName: "Smith"
+ *               email: "john.smith@example.com"
+ *               password: "password123"
  *     responses:
  *       200:
  *         description: Customer successfully added
@@ -197,9 +207,10 @@ router.post("/new-customer", async (req, res) => {
     }
 
     const result = await customers.addCustomer(data)
+    const { password, ...customerWithoutPassword } = data
     res.status(200).json({
       message: "Data received and inserted",
-      data: data,
+      data: { _id: result.insertedId, ...customerWithoutPassword },
       result,
     })
   } catch (error) {

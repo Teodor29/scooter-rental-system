@@ -6,6 +6,6 @@ import "@testing-library/jest-dom"
 describe("Renders the app", () => {
   test("test the main title", () => {
     render(<App />)
-    expect(screen.getByText("kund webbklient")).toBeInTheDocument()
+    expect(screen.getByText("Scooter Rental")).toBeInTheDocument()
   })
 })

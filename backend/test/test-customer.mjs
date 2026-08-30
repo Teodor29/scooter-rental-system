@@ -31,6 +31,8 @@ describe("POST /add-customer", () => {
     const newCustomer = {
       firstName: "John",
       lastName: "Doe",
+      email: "john.doe@example.com",
+      password: "password123",
     }
 
     const res = await request(app)
@@ -59,7 +61,12 @@ describe("POST /add-customer", () => {
 
 describe("GET /all-customers", () => {
   it("should return all customers from collection customers", async () => {
-    const newCustomer = { firstName: "Jane", lastName: "Doe" }
+    const newCustomer = {
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane.doe@example.com",
+      password: "password123",
+    }
 
     await request(app)
       .post("/api/v1/customers/new-customer")
