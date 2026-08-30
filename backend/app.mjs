@@ -12,7 +12,6 @@ import { authenticateApiKey } from "./src/middleware/authApiKey.mjs"
 import { rateLimiter } from "./src/middleware/rateLimit.mjs"
 
 const app = express()
-const PORT = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())
@@ -34,10 +33,5 @@ app.use("/api/v1/customers", authenticateApiKey, customerRoutesV1)
 app.use("/api/v1/admins", authenticateApiKey, adminRoutesV1)
 app.use("/api/v1/scooters", authenticateApiKey, scooterRoutesV1)
 app.use("/api/v1/cities", authenticateApiKey, citiesRoutesV1)
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-  console.log(`Documentation available at: http://localhost:${PORT}/api-docs`)
-})
 
 export default { app }
