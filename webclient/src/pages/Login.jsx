@@ -32,33 +32,31 @@ function Login() {
   }
 
   return (
-    <div className="main-content">
-      <div className="login">
-        <h1>Log in</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-          />
-          {error && <p className="login-error">{error}</p>}
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Log in"}
-          </button>
-        </form>
-        <Link to="/signup">Sign up</Link>
-      </div>
+    <div className="login">
+      <h2>Log in</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
+          required
+        />
+        {error && <p className="login-error">{error}</p>}
+        <button type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Log in"}
+        </button>
+      </form>
+      <Link to="/signup">Sign up</Link>
     </div>
   )
 }

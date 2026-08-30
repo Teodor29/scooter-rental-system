@@ -14,10 +14,15 @@
     width: 100%;
     margin: 0 0 1.5rem;
     padding: 1.5rem;
-    background-color: variables.$background2;
+    background-color: variables.$bg-surface;
     color: variables.$text-primary;
     border-radius: 0.5rem;
-    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
   }
 
   h3 {
@@ -32,7 +37,7 @@
   .angle {
     margin-left: auto;
     font-size: 1.5rem;
-    color: variables.$icon-inactive-color;
+    color: variables.$text-secondary;
   }
 }
 
@@ -56,16 +61,16 @@
   position: relative;
   text-align: center;
 
-  h1 {
-    margin: 0 0 0.6rem;
+  h2 {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem;
+    margin: 0;
+    font-size: 1.5rem;
   }
 
   .back {
-    color: variables.$icon-color;
+    color: variables.$text-secondary;
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
     cursor: pointer;
@@ -80,7 +85,6 @@
 }
 
 .page-footer {
-  margin-top: auto;
   margin: auto;
   padding: 1rem 0 2rem;
 

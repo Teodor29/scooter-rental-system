@@ -37,55 +37,53 @@ function Signup() {
   }
 
   return (
-    <div className="main-content">
-      <div className="login">
-        <h1>Sign up</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="First name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Last name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-          {error && <p className="login-error">{error}</p>}
-          <button type="submit" disabled={loading}>
-            {loading ? "Signing up..." : "Sign up"}
-          </button>
-        </form>
-        <Link to="/login">Log in</Link>
-      </div>
+    <div className="login">
+      <h2>Sign up</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="First name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Last name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete="new-password"
+          required
+        />
+        {error && <p className="login-error">{error}</p>}
+        <button type="submit" disabled={loading}>
+          {loading ? "Signing up..." : "Sign up"}
+        </button>
+      </form>
+      <Link to="/login">Log in</Link>
     </div>
   )
 }

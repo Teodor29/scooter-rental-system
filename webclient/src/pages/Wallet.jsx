@@ -6,29 +6,27 @@ function Wallet() {
   const { customer, error, loading } = useCustomer()
 
   return (
-    <div className="main-content profile-content">
+    <div className="profile-content">
       <div className="page-header">
         <Link to="/profile">
           <FaArrowLeft className="back" />
         </Link>
-        <h1>Wallet</h1>
+        <h2>Wallet</h2>
       </div>
       <div className="wallet">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {customer && (
           <div className="wallet-content">
-            <h1 className="balance">{customer.balance} Kr</h1>
+            <p className="balance">{customer.balance} Kr</p>
             <p>Available balance</p>
           </div>
         )}
       </div>
       <div className="page-footer">
-        <div className="footer-content">
-          <Link to="/add-funds">
-            <button>Add funds</button>
-          </Link>
-        </div>
+        <Link to="/add-funds">
+          <button>Add funds</button>
+        </Link>
       </div>
     </div>
   )

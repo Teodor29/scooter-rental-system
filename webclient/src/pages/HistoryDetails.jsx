@@ -7,12 +7,12 @@ function HistoryDetails() {
   const { rental } = location.state
 
   return (
-    <div className="main-content profile-content">
+    <div className="profile-content">
       <div className="page-header">
         <Link to="/history">
           <FaArrowLeft className="back" />
         </Link>
-        <h1>Details</h1>
+        <h2>Details</h2>
       </div>
       {rental && (
         <ul className="details-list">

@@ -1,7 +1,6 @@
 @use "variables";
 
 @use "header";
-@use "footer";
 @use "home";
 @use "profile";
 @use "login";
@@ -13,7 +12,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 html {
-  background-color: variables.$background;
+  background-color: variables.$bg-body;
   color: variables.$text-primary;
   line-height: 1.5;
 }
@@ -23,7 +22,7 @@ input,
 button,
 select,
 textarea {
-  font-family: variables.$font-primary !important;
+  font-family: variables.$font-family-base;
   line-height: 1.5;
 }
 
@@ -40,15 +39,13 @@ body {
 }
 
 .main-content {
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
 .center {
   text-align: center;
-}
-
-h1 {
-  font-size: 2.5rem;
 }
 
 a {
@@ -57,35 +54,40 @@ a {
 }
 
 button {
-  background-color: variables.$button-color;
-  color: variables.$color-white;
+  background-color: variables.$primary;
+  color: variables.$white;
   font-size: 1rem;
   font-weight: 700;
   border: none;
   border-radius: 2rem;
   padding: 0.6rem 1.2rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+
   &:hover {
-    background-color: variables.$button-hover-color;
+    background-color: variables.$primary-hover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 }
 
-.login-button {
-  color: variables.$color-white;
-  font-weight: 600;
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
 }
 
 input {
-  background-color: variables.$background2;
+  background-color: variables.$bg-surface;
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
-  border: none;
+  border: 1px solid variables.$border-color-light;
   border-radius: 0.5rem;
   box-sizing: border-box;
 
   &:focus {
     outline: none;
-    background-color: variables.$background3;
+    border-color: variables.$primary;
   }
 }

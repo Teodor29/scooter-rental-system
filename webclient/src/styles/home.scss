@@ -1,28 +1,39 @@
 @use "variables";
 
 .home {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
   background-image: url("../public/home.jpg");
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: variables.$text-light;
 
-  .home-container {
-    background-color: rgba(22, 22, 22, 0.8);
-    margin: 1rem;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.5);
+  }
+
+  .home-content {
+    position: relative;
+    z-index: 1;
+    color: variables.$text-light;
     padding: 2rem;
-    border-radius: 2rem;
+    margin: auto;
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 8rem);
-      margin: 0 0 1rem;
+    h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0;
     }
 
-    button {
-      font-size: clamp(1rem, 2.5vw, 2rem);
+    p {
+      color: variables.$text-muted;
+      margin-bottom: 1rem;
+      margin: 0 0 1rem 0;
     }
   }
 }

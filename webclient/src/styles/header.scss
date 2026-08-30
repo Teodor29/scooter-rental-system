@@ -1,7 +1,7 @@
 @use "variables";
 
 .header {
-  background-color: variables.$background-navbar;
+  background-color: variables.$bg-body;
   color: variables.$text-primary;
   padding: 1rem 2rem;
   display: flex;
@@ -11,6 +11,7 @@
 
   h1 {
     margin: 0;
+    font-size: 1.5rem;
   }
 
   a {
@@ -24,21 +25,18 @@
   .buttons {
     display: flex;
     align-items: center;
-
-    button {
-      margin-left: 1rem;
-    }
+    gap: 1rem;
   }
 }
 
 .logout-button {
   border-radius: 2rem;
   padding: 0.5rem 1rem;
-  margin-right: 1rem;
   font-weight: 500;
+  transition: background-color 0.2s;
 
   &:hover {
-    background-color: variables.$color-light2;
+    background-color: variables.$border-color-light;
   }
 }
 
@@ -46,9 +44,10 @@
   font-size: 2rem;
   display: flex;
   align-items: center;
-  color: variables.$icon-color !important;
+  color: variables.$text-secondary !important;
+  transition: color 0.2s;
 
   &:hover {
-    color: variables.$icon-hover-color !important;
+    color: variables.$text-primary !important;
   }
 }

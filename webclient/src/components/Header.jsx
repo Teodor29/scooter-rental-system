@@ -8,7 +8,7 @@ function Header() {
   return (
     <div className="header">
       <h1>
-        <Link to="/">kund webbklient</Link>
+        <Link to="/">Scooter Rental</Link>
       </h1>
       <div className="buttons">
         {isLoggedIn ? (

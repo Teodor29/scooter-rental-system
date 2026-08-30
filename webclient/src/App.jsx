@@ -13,7 +13,6 @@ import Home from "./pages/Home"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -38,7 +37,6 @@ function App() {
                 </Route>
               </Routes>
             </div>
-            <Footer />
           </div>
         </Router>
       </CustomerProvider>

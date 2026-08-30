@@ -6,24 +6,18 @@ function Home() {
 
   return (
     <div className="home">
-      <div className="home-container">
+      <div className="home-content">
+        <h2>Your ride is waiting</h2>
         {isLoggedIn ? (
           <>
-            <h1>
-              Go to your profile
-              <br />
-              to see activity
-            </h1>
+            <p>Go to your profile to see your activity.</p>
             <Link to="/profile">
-              <button className="login-button">Profile</button>
+              <button className="login-button">Go to profile</button>
             </Link>
           </>
         ) : (
           <>
-            <h1>
-              Log in to see <br />
-              your activity
-            </h1>
+            <p>Log in to see your activity.</p>
             <Link to="/login">
               <button className="login-button">Log in</button>
             </Link>
