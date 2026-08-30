@@ -74,14 +74,14 @@ function Scooters() {
     <div className="scooters">
       <div className="page-header">
         <div className="filter">
-            <label htmlFor="filter">Filter:</label>
-            <select id="filter" value={filter} onChange={handleFilterChange}>
-              <option value="all">All</option>
-              <option value="lowBattery">Low Battery</option>
-              <option value="highBattery">High Battery</option>
-              <option value="rented">Rented</option>
-              <option value="available">Available</option>
-            </select>
+          <label htmlFor="filter">Filter:</label>
+          <select id="filter" value={filter} onChange={handleFilterChange}>
+            <option value="all">All</option>
+            <option value="lowBattery">Low Battery</option>
+            <option value="highBattery">High Battery</option>
+            <option value="rented">Rented</option>
+            <option value="available">Available</option>
+          </select>
         </div>
         <Link to="/add-scooter">
           <button>Add scooter</button>

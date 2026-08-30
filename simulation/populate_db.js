@@ -164,7 +164,9 @@ export async function addMultipleScootersRotatingCities(number) {
     )
   }
 
-  console.log(`${number} scooters have been added across ${citiesList.join(", ")}.`)
+  console.log(
+    `${number} scooters have been added across ${citiesList.join(", ")}.`,
+  )
 }
 
 export async function seedAll(scooterCount = 30, customerCount = 10) {
@@ -187,7 +189,9 @@ export async function seedAll(scooterCount = 30, customerCount = 10) {
   console.log(
     `Seeded ${cityCount} cities, ${scooterCount} scooters, ${customerCount} customers.`,
   )
-  console.log(`Admin username: "${ADMIN_USERNAME}", password: "${ADMIN_PASSWORD}"`)
+  console.log(
+    `Admin username: "${ADMIN_USERNAME}", password: "${ADMIN_PASSWORD}"`,
+  )
 }
 
 //this function will be called

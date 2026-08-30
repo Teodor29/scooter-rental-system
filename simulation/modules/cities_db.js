@@ -5,7 +5,10 @@ import fs from "fs"
 import database from "./db.js"
 
 const collectionName = "cities_locations"
-const CITY_DATA_PATH = new URL("../../city-data/city-data.json", import.meta.url)
+const CITY_DATA_PATH = new URL(
+  "../../city-data/city-data.json",
+  import.meta.url,
+)
 
 async function importCitiesFromFile() {
   const citiesData = JSON.parse(fs.readFileSync(CITY_DATA_PATH, "utf-8"))
