@@ -128,9 +128,8 @@ function Map() {
       {error && <p className="error-msg">{error}</p>}
       {cities && (
         <div className="page-header">
-          <h2>Map</h2>
-          <div className="map-options">
-            <label htmlFor="city-select">Choose a city:</label>
+          <div>
+            <label htmlFor="city-select">City:</label>
             <select id="city-select" onChange={handleCityChange}>
               {cities.data.map((city) => (
                 <option key={city._id} value={city._id}>
@@ -138,7 +137,9 @@ function Map() {
                 </option>
               ))}
             </select>
-            <label htmlFor="filter">Filter by:</label>
+          </div>
+          <div>
+            <label htmlFor="filter">Filter:</label>
             <select id="filter" value={filter} onChange={handleFilterChange}>
               <option value="all">All</option>
               <option value="lowBattery">Low Battery</option>

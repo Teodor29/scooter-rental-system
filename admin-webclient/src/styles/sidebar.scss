@@ -7,14 +7,18 @@
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 
 .sidebar-menu a {
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
   color: variables.$text-primary;
   font-size: large;
+  border-radius: 0.5rem;
   &:hover {
     color: variables.$text-secondary;
+  }
+  &.active {
+    background-color: variables.$background2;
   }
 }

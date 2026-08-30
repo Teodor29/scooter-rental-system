@@ -25,7 +25,7 @@ function AddScooter() {
 
   return (
     <div className="add-scooter">
-      <h1>Add Scooter</h1>
+      <h2>Add Scooter</h2>
       <form onSubmit={handleAddScooter}>
         <input
           type="text"

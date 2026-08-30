@@ -63,17 +63,16 @@ function Customers() {
   return (
     <div className="customers">
       <div className="page-header">
-        <h2>Customers</h2>
+        <input
+          type="text"
+          placeholder="Search customers..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <Link to="/add-customer">
           <button>Add Customer</button>
         </Link>
       </div>
-      <input
-        type="text"
-        placeholder="Search customers..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
       {loading && <h2>Loading...</h2>}
       {error && <p>{error}</p>}
       {customers && (

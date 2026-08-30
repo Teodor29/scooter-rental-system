@@ -10,22 +10,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 html {
-  background-color: variables.$background;
-  color: variables.$text-primary;
-}
-
-html,
-input,
-button,
-select,
-textarea {
-  font-family: variables.$font-primary !important;
-  line-height: 1.5;
+  font-family: variables.$font-primary;
 }
 
 body {
   margin: 0;
   padding: 0;
+  color: variables.$text-primary;
+  background-color: variables.$background;
 }
 
 h2 {
@@ -49,6 +41,11 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  gap: 1rem;
+
+  input {
+    margin-bottom: 0;
+  }
 }
 
 .main-content {
@@ -68,6 +65,12 @@ a {
 form {
   display: flex;
   flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  button {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
 }
 
 input {
@@ -94,16 +97,17 @@ select {
 }
 
 label {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 button {
   background-color: variables.$button-color;
   color: variables.$button-text;
   font-size: 1rem;
+  font-weight: 600;
   border: none;
   border-radius: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.25rem;
   cursor: pointer;
   transition: background-color 0.3s;
 

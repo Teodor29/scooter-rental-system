@@ -73,7 +73,16 @@ function Scooters() {
   return (
     <div className="scooters">
       <div className="page-header">
-        <h2>Scooters</h2>
+        <div className="filter">
+            <label htmlFor="filter">Filter:</label>
+            <select id="filter" value={filter} onChange={handleFilterChange}>
+              <option value="all">All</option>
+              <option value="lowBattery">Low Battery</option>
+              <option value="highBattery">High Battery</option>
+              <option value="rented">Rented</option>
+              <option value="available">Available</option>
+            </select>
+        </div>
         <Link to="/add-scooter">
           <button>Add scooter</button>
         </Link>
@@ -82,14 +91,6 @@ function Scooters() {
       {error && <p>{error}</p>}
       {scooters && (
         <>
-          <label htmlFor="filter">Filter by:</label>
-          <select id="filter" value={filter} onChange={handleFilterChange}>
-            <option value="all">All</option>
-            <option value="lowBattery">Low Battery</option>
-            <option value="highBattery">High Battery</option>
-            <option value="rented">Rented</option>
-            <option value="available">Available</option>
-          </select>
           <table>
             <thead>
               <tr>

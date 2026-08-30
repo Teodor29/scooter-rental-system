@@ -24,7 +24,7 @@ function AddCustomer() {
 
   return (
     <div className="add-customer">
-      <h1>Add Customer</h1>
+      <h2>Add Customer</h2>
       <form onSubmit={handleAddCustomer}>
         <input
           type="text"

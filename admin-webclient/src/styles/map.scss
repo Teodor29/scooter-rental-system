@@ -6,12 +6,13 @@
   display: flex;
   flex-direction: column;
 
-  h2 {
-    margin: 0;
+  .page-header {
+    display: flex;
+    justify-content: left
   }
 
-  .page-header {
-    flex-shrink: 0;
+  h2 {
+    margin: 0;
   }
 
   .leaflet-container {
@@ -24,12 +25,6 @@
   .leaflet-popup-content {
     p {
       margin: 0.5rem 0;
-    }
-  }
-
-  .map-options {
-    label {
-      margin: 1rem;
     }
   }
 
