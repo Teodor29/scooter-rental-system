@@ -1,9 +1,12 @@
 @use "variables";
 
 .map {
+  flex: 1;
+
   .leaflet-container {
     width: 100%;
-    height: 82vh;
+    height: 100%;
+    min-height: 100%;
   }
 
   .leaflet-popup-content {
@@ -63,7 +66,7 @@
   .map-scooter-icon {
     border-radius: 50%;
     color: variables.$text-primary;
-    background-color: variables.$color-accent2;
+    background-color: variables.$primary-hover;
     display: flex;
     align-items: center;
     justify-content: center;

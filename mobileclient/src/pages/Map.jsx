@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react"
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Circle,
-  Rectangle,
-  useMap,
-} from "react-leaflet"
+import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css" // Import Leaflet CSS
 import { TbScooter } from "react-icons/tb"

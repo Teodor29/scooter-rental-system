@@ -1,52 +1,25 @@
-// colors
-$color-black: #000000;
-$color-dark: #171717;
-$color-dark2: #212121;
-$color-dark3: #313131;
-$color-dark4: #414141;
-$color-dark5: #515151;
-$color-dark-inactive: #989898;
-$color-light: #eee;
-$color-light2: #ddd;
-$color-light3: #ccc;
-$color-light4: #bbb;
-$color-light5: #aaa;
-$color-white: #ffffff;
-$color-accent: #5a8f6a;
-$color-accent2: #4a7f5a;
-$color-blue: #2d60a7;
-$color-red: #7c3431;
-$color-red2: #6c2421;
-
 // fonts
-$font-primary: "Inter", sans-serif;
-$font-secondary: "Open Sans", sans-serif;
+$font-family-base: "Inter", sans-serif;
+
+// colors
+$white: oklch(1 0 0);
+$primary: oklch(0.55 0.1 140);
+$primary-hover: oklch(0.5 0.1 140);
+$info: oklch(0.5 0.1264 257.28);
+$danger: oklch(0.4 0.1012 24.73);
+$danger-hover: oklch(0.35 0.1035 25.85);
 
 // text
-$text-primary: $color-dark2;
-$text-secondary: $color-dark4;
-$text-link: $color-blue;
-$text-dark: $color-dark3;
-$text-light: $color-white;
+$text-primary: oklch(0.2 0 0);
+$text-secondary: oklch(0.4 0 0);
+$text-light: $white;
+$text-muted: oklch(0.9 0 0);
+$text-link: $info;
 
 // background
-$background-navbar: $color-white;
-$background: $color-light;
-$background2: $color-white;
-$background3: $color-light2;
-$background4: $color-light3;
+$bg-body: oklch(0.92 0.01 140);
+$bg-surface: oklch(0.98 0.01 140);
 
-// button
-$button-color: $color-accent;
-$button-hover-color: $color-accent2;
-$button-outline-color: $color-dark5;
-$button-text: $color-white;
-
-// table
-$table-outline: $color-light5;
-$table-background: $color-light3;
-
-// icons
-$icon-color: $color-dark5;
-$icon-hover-color: $color-dark;
-$icon-inactive-color: $color-dark-inactive;
+// border
+$border-color: oklch(0.7 0 0);
+$border-color-light: oklch(0.8 0 0);

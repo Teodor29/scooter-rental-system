@@ -12,7 +12,7 @@ function HistoryDetails() {
         <Link to="/history">
           <FaArrowLeft className="back" />
         </Link>
-        <h1>Details</h1>
+        <h2>Details</h2>
       </div>
       {rental && (
         <ul className="details-list">

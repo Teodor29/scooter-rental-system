@@ -9,9 +9,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
     color: variables.$text-primary;
-    border-bottom: 1px solid variables.$table-outline;
+    border-bottom: 1px solid variables.$border-color;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: variables.$bg-surface;
+    }
   }
 
   .history-details {
@@ -43,7 +49,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    border-bottom: 1px solid variables.$table-outline;
+    border-bottom: 1px solid variables.$border-color;
   }
 
   span {

@@ -16,9 +16,9 @@
 }
 
 .delete-button {
-  background-color: variables.$color-red;
+  background-color: variables.$danger;
 
   &:hover {
-    background-color: variables.$color-red2;
+    background-color: variables.$danger-hover;
   }
 }

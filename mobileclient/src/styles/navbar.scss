@@ -1,45 +1,39 @@
 @use "variables";
 
 .navbar {
-  background-color: variables.$background-navbar;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  height: 18vh;
+  bottom: 0;
+  z-index: 10;
+  background-color: variables.$bg-body;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid variables.$border-color-light;
 
   .nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
 
     .nav-item {
-      margin: 0 0 1rem;
-      font-size: small;
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: variables.$icon-color;
-      transition: color 0.3s;
-
-      span {
-        font-size: 0.8rem;
-        font-weight: 500;
-      }
-
-      &:hover {
-        color: variables.$icon-hover-color;
-      }
+      justify-content: center;
+      color: variables.$text-secondary;
+      padding: 1rem;
 
       .nav-icon {
-        font-size: 1.8rem;
-        margin-bottom: 2px;
+        font-size: 1.75rem;
+        margin-bottom: 0.2rem;
       }
 
       .qr {
-        margin: 0.5rem 0;
-        font-size: 2.2rem;
-        background-color: variables.$color-accent;
-        padding: 1rem;
+        font-size: 3rem;
+        background-color: variables.$primary;
+        padding: 0.5rem;
         border-radius: 50%;
-        color: variables.$color-white;
+        color: variables.$white;
       }
     }
   }

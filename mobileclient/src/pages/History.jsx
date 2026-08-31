@@ -12,7 +12,7 @@ function History() {
         <Link to="/profile">
           <FaArrowLeft className="back" />
         </Link>
-        <h1>History</h1>
+        <h2>History</h2>
       </div>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}

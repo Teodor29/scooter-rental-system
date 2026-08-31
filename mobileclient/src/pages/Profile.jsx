@@ -9,7 +9,7 @@ function Profile() {
   return (
     <div className="main-content">
       <div className="profile">
-        <h1>Profile</h1>
+        <h2 className="center">Profile</h2>
         <Link to="/account">
           <MdOutlineAccountCircle className="icon" />
           <h3>Account</h3>

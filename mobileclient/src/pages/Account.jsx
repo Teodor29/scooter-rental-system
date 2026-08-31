@@ -39,58 +39,54 @@ function Account() {
   }
 
   return (
-    <>
+    <div className="main-content account">
       <div className="page-header">
         <Link to="/profile">
           <FaArrowLeft className="back" />
         </Link>
-        <h1>Account</h1>
+        <h2>Account</h2>
         <button className="save-button" onClick={handleSubmit}>
           Save
         </button>
       </div>
-      <div className="main-content account">
-        <div className="page-content">
-          {loading && <p>Loading...</p>}
-          {error && <p>{error}</p>}
-          {customer && (
-            <form onSubmit={handleSubmit}>
-              <div className="name-inputs">
-                <input
-                  type="text"
-                  id="firstname"
-                  name="firstName"
-                  value={customerInfo.firstName}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  id="lastname"
-                  name="lastName"
-                  value={customerInfo.lastName}
-                  onChange={handleChange}
-                />
-              </div>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={customerInfo.email}
-                onChange={handleChange}
-              />
-            </form>
-          )}
-        </div>
-        <div className="page-footer">
-          <Link to="/">
-            <button onClick={logout}>Logout</button>
-          </Link>
-          <Link to="/">
-            <button className="delete-button">Delete Account</button>
-          </Link>
-        </div>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {customer && (
+        <form onSubmit={handleSubmit}>
+          <div className="name-inputs">
+            <input
+              type="text"
+              id="firstname"
+              name="firstName"
+              value={customerInfo.firstName}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              id="lastname"
+              name="lastName"
+              value={customerInfo.lastName}
+              onChange={handleChange}
+            />
+          </div>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={customerInfo.email}
+            onChange={handleChange}
+          />
+        </form>
+      )}
+      <div className="page-footer">
+        <Link to="/">
+          <button onClick={logout}>Logout</button>
+        </Link>
+        <Link to="/">
+          <button className="delete-button">Delete Account</button>
+        </Link>
       </div>
-    </>
+    </div>
   )
 }
 
