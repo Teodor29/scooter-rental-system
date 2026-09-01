@@ -1,10 +1,10 @@
-import { useCustomer } from "../context/CustomerContext"
+import { useAuth } from "../context/AuthContext"
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
 import { formatDate } from "../utils/date"
 
 function History() {
-  const { customer, error, loading } = useCustomer()
+  const { customer, error, loading } = useAuth()
 
   return (
     <div className="main-content">

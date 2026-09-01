@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
-import { useCustomer } from "../context/CustomerContext"
+import { useAuth } from "../context/AuthContext"
 
 function Wallet() {
-  const { customer, error, loading } = useCustomer()
+  const { customer, error, loading } = useAuth()
 
   return (
     <div className="profile-content">

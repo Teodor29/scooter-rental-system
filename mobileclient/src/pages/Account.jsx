@@ -2,11 +2,9 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
 import { useAuth } from "../context/AuthContext"
-import { useCustomer } from "../context/CustomerContext"
 
 function Account() {
-  const { logout } = useAuth()
-  const { customer, loading, error } = useCustomer()
+  const { logout, customer, loading, error } = useAuth()
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
     lastName: "",
