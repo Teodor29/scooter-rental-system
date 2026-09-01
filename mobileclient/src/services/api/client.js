@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getToken, ClearToken } from "./token"
+import { getToken, clearToken } from "./token"
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -21,7 +21,7 @@ api.interceptors.response.use(
 
   (error) => {
     if (error.response?.status === 401) {
-      ClearToken()
+      clearToken()
     }
 
     return Promise.reject(error)
