@@ -14,7 +14,9 @@ export function authenticate(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
+    req.userId = decoded.customerId ?? decoded.id
     req.customerId = decoded.customerId
+    req.userRole = decoded.role
 
     next()
   } catch {
@@ -22,4 +24,14 @@ export function authenticate(req, res, next) {
       message: "Invalid or expired token",
     })
   }
+}
+
+export function authorizeAdmin(req, res, next) {
+  if (req.userRole !== "admin") {
+    return res.status(403).json({
+      message: "Admin access required",
+    })
+  }
+
+  next()
 }

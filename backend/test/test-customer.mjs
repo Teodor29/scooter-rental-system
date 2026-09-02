@@ -2,28 +2,19 @@ process.env.NODE_ENV = "test"
 
 import request from "supertest"
 import { expect } from "chai"
-import appdata from "../app.mjs" // Adjust the path to your app file
+import jwt from "jsonwebtoken"
+import appdata from "../app.mjs"
 import database from "../db/database.mjs"
 
 const app = appdata.app
-const apiKey = "test"
+
+const generateToken = (customerId) =>
+  jwt.sign({ customerId }, process.env.JWT_SECRET || "dev-local-jwt-secret", {
+    expiresIn: "1h",
+  })
 
 before(async () => {
-  // Insert the API Key into the "apiKeys" collection before running any tests
-  const db = await database.getCollection("apiKeys")
-  await db.collection.insertOne({ key: apiKey })
-  await db.client.close()
-})
-
-describe("API Key Setup", () => {
-  it("should have API key inserted into apiKeys collection", async () => {
-    const db = await database.getCollection("apiKeys")
-    const apiKeyEntry = await db.collection.findOne({ key: apiKey })
-    await db.client.close()
-
-    expect(apiKeyEntry).to.not.be.null
-    expect(apiKeyEntry).to.have.property("key", apiKey)
-  })
+  process.env.JWT_SECRET = process.env.JWT_SECRET || "dev-local-jwt-secret"
 })
 
 describe("POST /add-customer", () => {
@@ -37,7 +28,6 @@ describe("POST /add-customer", () => {
 
     const res = await request(app)
       .post("/api/v1/customers/new-customer")
-      .set("x-api-key", apiKey)
       .send(newCustomer)
       .expect(200)
 
@@ -70,14 +60,15 @@ describe("GET /all-customers", () => {
 
     await request(app)
       .post("/api/v1/customers/new-customer")
-      .set("x-api-key", apiKey)
       .send(newCustomer)
       .expect(200)
+
+    const token = generateToken("507f1f77bcf86cd799439011")
 
     // Now, fetch all customers
     const res = await request(app)
       .get("/api/v1/customers/all-customers")
-      .set("x-api-key", apiKey)
+      .set("Authorization", `Bearer ${token}`)
       .expect(200)
 
     // Check that the response contains 'data' and that it's an array
@@ -106,9 +97,11 @@ describe("DELETE", () => {
   })
 
   it("should delete a customer successfully", async () => {
+    const token = generateToken("507f1f77bcf86cd799439011")
+
     const res = await request(app)
-      .delete("/api/v1/customers/delete-one-customer") // Make sure this matches your route
-      .set("x-api-key", apiKey)
+      .delete("/api/v1/customers/delete-one-customer")
+      .set("Authorization", `Bearer ${token}`)
       .send({ _id: customerId.toString() })
       .expect(200)
 
@@ -137,9 +130,11 @@ describe("DELETE", () => {
   // });
 
   it("should delete all customers successfully", async () => {
+    const token = generateToken("507f1f77bcf86cd799439011")
+
     const res = await request(app)
       .delete("/api/v1/customers/delete-all-customers")
-      .set("x-api-key", apiKey)
+      .set("Authorization", `Bearer ${token}`)
       .expect(200)
 
     expect(res.body).to.have.property(

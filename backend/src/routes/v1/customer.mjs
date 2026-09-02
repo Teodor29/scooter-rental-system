@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign(
-      { customerId: customer._id },
+      { customerId: customer._id, role: "customer" },
       process.env.JWT_SECRET,
       {
         expiresIn: "1h",
@@ -113,7 +113,7 @@ router.post("/login", async (req, res) => {
  *                 error:
  *                   type: string
  */
-router.get("/all-customers", async (req, res) => {
+router.get("/all-customers", authenticate, async (req, res) => {
   try {
     const data = await customers.getAllCustomers()
     res.status(200).json({ data })
@@ -222,7 +222,7 @@ router.post("/new-customer", async (req, res) => {
   }
 })
 
-router.get("/customer/:id", async (req, res) => {
+router.get("/customer/:id", authenticate, async (req, res) => {
   const customerId = req.params.id
 
   try {
@@ -236,7 +236,7 @@ router.get("/customer/:id", async (req, res) => {
   }
 })
 
-router.put("/update-customer/:id", async (req, res) => {
+router.put("/update-customer/:id", authenticate, async (req, res) => {
   const customerId = req.params.id
   const updatedData = req.body
 
@@ -297,7 +297,7 @@ router.put("/update-customer/:id", async (req, res) => {
  *                   type: string
  *                   example: An error occurred while deleting customers
  */
-router.delete("/delete-all-customers", async (req, res) => {
+router.delete("/delete-all-customers", authenticate, async (req, res) => {
   try {
     const result = await customers.deleteAllCustomers()
     res.status(200).json({
@@ -338,7 +338,7 @@ router.delete("/delete-all-customers", async (req, res) => {
  *       500:
  *         description: Failed to delete customer due to an internal error
  */
-router.delete("/delete-one-customer", async (req, res) => {
+router.delete("/delete-one-customer", authenticate, async (req, res) => {
   const customerID = req.body._id
   try {
     const result = await customers.deleteOneCustomer(customerID)

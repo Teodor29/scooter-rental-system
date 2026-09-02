@@ -2,6 +2,7 @@ import express from "express"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import admins from "../../controllers/adminController.mjs"
+import { authenticate, authorizeAdmin } from "../../middleware/authenticate.mjs"
 
 const router = express.Router()
 
@@ -21,9 +22,13 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid username or password." })
     }
 
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    })
+    const token = jwt.sign(
+      { id: admin._id, role: "admin" },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      },
+    )
 
     res.status(200).json({
       token,
@@ -34,7 +39,7 @@ router.post("/login", async (req, res) => {
   }
 })
 
-router.get("/all-admins", async (req, res) => {
+router.get("/all-admins", authenticate, authorizeAdmin, async (req, res) => {
   try {
     const data = await admins.getAllAdmins()
     res.status(200).json({ data })
@@ -46,7 +51,7 @@ router.get("/all-admins", async (req, res) => {
   }
 })
 
-router.post("/new-admin", async (req, res) => {
+router.post("/new-admin", authenticate, authorizeAdmin, async (req, res) => {
   const data = req.body
 
   try {
@@ -65,7 +70,7 @@ router.post("/new-admin", async (req, res) => {
   }
 })
 
-router.get("/admin/:id", async (req, res) => {
+router.get("/admin/:id", authenticate, authorizeAdmin, async (req, res) => {
   const adminId = req.params.id
 
   try {
@@ -79,56 +84,71 @@ router.get("/admin/:id", async (req, res) => {
   }
 })
 
-router.put("/update-admin/:id", async (req, res) => {
-  const adminId = req.params.id
-  const updatedData = req.body
+router.put(
+  "/update-admin/:id",
+  authenticate,
+  authorizeAdmin,
+  async (req, res) => {
+    const adminId = req.params.id
+    const updatedData = req.body
 
-  try {
-    if (!updatedData || Object.keys(updatedData).length === 0) {
-      return res.status(400).json({ error: "No data was provided." })
+    try {
+      if (!updatedData || Object.keys(updatedData).length === 0) {
+        return res.status(400).json({ error: "No data was provided." })
+      }
+
+      const result = await admins.updateAdmin(adminId, updatedData)
+      res.status(200).json({ result })
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to update information",
+        error: error.message,
+      })
     }
+  },
+)
 
-    const result = await admins.updateAdmin(adminId, updatedData)
-    res.status(200).json({ result })
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to update information",
-      error: error.message,
-    })
-  }
-})
-
-router.delete("/delete-all-admins", async (req, res) => {
-  try {
-    const result = await admins.deleteAllAdmins()
-    res.status(200).json({
-      message: "All admins deleted successfully",
-      result,
-    })
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to delete admins",
-      error: error.message,
-    })
-  }
-})
-
-router.delete("/delete-admin", async (req, res) => {
-  const adminID = req.body._id
-  try {
-    const result = await admins.deleteAdmin(adminID)
-
-    if (result.deletedCount === 1) {
-      res.status(200).json({ message: "Admin deleted successfully" })
-    } else {
-      res.status(404).json({ message: "Admin not found" })
+router.delete(
+  "/delete-all-admins",
+  authenticate,
+  authorizeAdmin,
+  async (req, res) => {
+    try {
+      const result = await admins.deleteAllAdmins()
+      res.status(200).json({
+        message: "All admins deleted successfully",
+        result,
+      })
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to delete admins",
+        error: error.message,
+      })
     }
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to delete admin",
-      error: error.message,
-    })
-  }
-})
+  },
+)
+
+router.delete(
+  "/delete-admin",
+  authenticate,
+  authorizeAdmin,
+  async (req, res) => {
+    const adminID = req.body._id
+    try {
+      const result = await admins.deleteAdmin(adminID)
+
+      if (result.deletedCount === 1) {
+        res.status(200).json({ message: "Admin deleted successfully" })
+      } else {
+        res.status(404).json({ message: "Admin not found" })
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to delete admin",
+        error: error.message,
+      })
+    }
+  },
+)
 
 export default router

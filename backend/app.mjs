@@ -8,7 +8,6 @@ import customerRoutesV1 from "./src/routes/v1/customer.mjs"
 import adminRoutesV1 from "./src/routes/v1/admin.mjs"
 import scooterRoutesV1 from "./src/routes/v1/scooters.mjs"
 import citiesRoutesV1 from "./src/routes/v1/cities.mjs"
-import { authenticateApiKey } from "./src/middleware/authApiKey.mjs"
 import { rateLimiter } from "./src/middleware/rateLimit.mjs"
 
 const app = express()
@@ -29,9 +28,9 @@ app.get("/", (req, res) => {
   res.json({ hej: "Hello World" })
 })
 
-app.use("/api/v1/customers", authenticateApiKey, customerRoutesV1)
-app.use("/api/v1/admins", authenticateApiKey, adminRoutesV1)
-app.use("/api/v1/scooters", authenticateApiKey, scooterRoutesV1)
-app.use("/api/v1/cities", authenticateApiKey, citiesRoutesV1)
+app.use("/api/v1/customers", customerRoutesV1)
+app.use("/api/v1/admins", adminRoutesV1)
+app.use("/api/v1/scooters", scooterRoutesV1)
+app.use("/api/v1/cities", citiesRoutesV1)
 
 export default { app }

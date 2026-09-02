@@ -1,5 +1,6 @@
 import express from "express"
 import scooters from "../../controllers/scooterController.mjs"
+import { authenticate, authorizeAdmin } from "../../middleware/authenticate.mjs"
 
 const router = express.Router()
 
@@ -58,7 +59,7 @@ const router = express.Router()
  *                 error:
  *                   type: string
  */
-router.get("/all-scooters", async (req, res) => {
+router.get("/all-scooters", authenticate, async (req, res) => {
   try {
     const data = await scooters.getAllScooters()
     res.status(200).json({ data })
@@ -70,7 +71,7 @@ router.get("/all-scooters", async (req, res) => {
   }
 })
 
-router.get("/scooter/:id", async (req, res) => {
+router.get("/scooter/:id", authenticate, async (req, res) => {
   const scooterId = req.params.id
 
   try {
@@ -84,41 +85,51 @@ router.get("/scooter/:id", async (req, res) => {
   }
 })
 
-router.put("/update-scooter/:id", async (req, res) => {
-  const scooterId = req.params.id
-  const updatedData = req.body
+router.put(
+  "/update-scooter/:id",
+  authenticate,
+  authorizeAdmin,
+  async (req, res) => {
+    const scooterId = req.params.id
+    const updatedData = req.body
 
-  try {
-    if (!updatedData || Object.keys(updatedData).length === 0) {
-      return res.status(400).json({ error: "No data was provided." })
+    try {
+      if (!updatedData || Object.keys(updatedData).length === 0) {
+        return res.status(400).json({ error: "No data was provided." })
+      }
+
+      const result = await scooters.updateScooter(scooterId, updatedData)
+      res.status(200).json({ result })
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to update scooter information",
+        error: error.message,
+      })
     }
+  },
+)
 
-    const result = await scooters.updateScooter(scooterId, updatedData)
-    res.status(200).json({ result })
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to update scooter information",
-      error: error.message,
-    })
-  }
-})
+router.delete(
+  "/delete-one-scooter",
+  authenticate,
+  authorizeAdmin,
+  async (req, res) => {
+    const scooterID = req.body._id
+    try {
+      const result = await scooters.deleteOneScooter(scooterID)
 
-router.delete("/delete-one-scooter", async (req, res) => {
-  const scooterID = req.body._id
-  try {
-    const result = await scooters.deleteOneScooter(scooterID)
-
-    if (result.deletedCount === 1) {
-      res.status(200).json({ message: "Scooter deleted successfully" })
-    } else {
-      res.status(404).json({ message: "Scooter not found" })
+      if (result.deletedCount === 1) {
+        res.status(200).json({ message: "Scooter deleted successfully" })
+      } else {
+        res.status(404).json({ message: "Scooter not found" })
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to delete Scooter",
+        error: error.message,
+      })
     }
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to delete Scooter",
-      error: error.message,
-    })
-  }
-})
+  },
+)
 
 export default router

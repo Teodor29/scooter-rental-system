@@ -3,9 +3,6 @@ import { getToken, clearToken } from "./token"
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  headers: {
-    "x-api-key": import.meta.env.VITE_API_KEY,
-  },
 })
 
 api.interceptors.request.use((config) => {
@@ -25,7 +22,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error)
-  }
+  },
 )
 
 export default api

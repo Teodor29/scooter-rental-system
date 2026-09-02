@@ -1,11 +1,16 @@
 import axios from "axios"
-import { clearToken } from "./token"
+import { getToken, clearToken } from "./token"
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  headers: {
-    "x-api-key": import.meta.env.VITE_API_KEY,
-  },
+})
+
+api.interceptors.request.use((config) => {
+  const token = getToken()
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
 })
 
 api.interceptors.response.use(
@@ -17,7 +22,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error)
-  }
+  },
 )
 
 export default api
