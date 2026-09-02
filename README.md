@@ -9,9 +9,9 @@ A full-stack scooter rental system developed as a group project at Blekinge Inst
 <img width="1440" height="900" alt="web-app" src="https://github.com/user-attachments/assets/6048ac1e-8415-4161-a824-93fd7ab74362" />
 
 ## Mobile App
-<img width="320" height="569" alt="mobile-app1" src="https://github.com/user-attachments/assets/273ebd22-633d-4510-8fbb-26d473e03f37" />
-<img width="320" height="569" alt="mobile-app2" src="https://github.com/user-attachments/assets/ea65e35a-9957-4a27-ad47-e5d80b041f73" />
-<img width="320" height="569" alt="mobile-app3" src="https://github.com/user-attachments/assets/a2238329-9436-4145-8734-a5faa1ada042" />
+<img width="270" height="480" alt="mobile-app1" src="https://github.com/user-attachments/assets/273ebd22-633d-4510-8fbb-26d473e03f37" />
+<img width="270" height="480" alt="mobile-app2" src="https://github.com/user-attachments/assets/ea65e35a-9957-4a27-ad47-e5d80b041f73" />
+<img width="270" height="480" alt="mobile-app3" src="https://github.com/user-attachments/assets/a2238329-9436-4145-8734-a5faa1ada042" />
 
 ## Technologies
 
