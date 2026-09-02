@@ -15,6 +15,15 @@
     margin: 0;
   }
 
+  .leaflet-popup-content-wrapper {
+    background-color: variables.$background;
+    color: variables.$text-primary;
+  }
+
+  .leaflet-popup-tip {
+    background-color: variables.$background;
+  }
+
   .leaflet-container {
     width: 100%;
     flex: 1;
@@ -24,8 +33,23 @@
 
   .leaflet-popup-content {
     p {
-      margin: 0.5rem 0;
+      margin: 0;
+      margin-bottom: 0.5rem;
     }
+    margin: 1rem;
+
+    button {
+      background-color: variables.$background2;
+      color: variables.$text-primary;
+      border: 1px solid variables.$button-outline-color;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .leaflet-container a.leaflet-popup-close-button {
+    color: variables.$text-primary;
+    font-size: 1rem;
   }
 
   .scooter-icon {

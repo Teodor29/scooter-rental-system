@@ -35,7 +35,6 @@ function Login() {
     <div className="main-content">
       <div className="login">
         <img src="/scooter.svg" alt="Login Image" />
-        <h2>Log in</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="email"

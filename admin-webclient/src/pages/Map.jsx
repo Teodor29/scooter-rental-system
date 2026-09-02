@@ -179,7 +179,7 @@ function Map() {
               }
             >
               <Popup>
-                <h2>{scooter._id}</h2>
+                <h3>{scooter._id}</h3>
                 <p>Status: {scooter.status}</p>
                 <p>Battery: {scooter.battery}</p>
                 <p>Speed: {scooter.speed}</p>
