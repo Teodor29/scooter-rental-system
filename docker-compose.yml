@@ -27,10 +27,10 @@ services:
     depends_on:
       - mongo
 
-  admin-webclient:
-    container_name: admin-webclient
+  admin-dashboard:
+    container_name: admin-dashboard
     build:
-      context: ./admin-webclient
+      context: ./admin-dashboard
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
@@ -39,10 +39,10 @@ services:
     env_file:
       - .env
 
-  webclient:
-    container_name: webclient
+  web-app:
+    container_name: web-app
     build:
-      context: ./webclient
+      context: ./web-app
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
@@ -51,10 +51,10 @@ services:
     env_file:
       - .env
 
-  mobileclient:
-    container_name: mobileclient
+  mobile-app:
+    container_name: mobile-app
     build:
-      context: ./mobileclient
+      context: ./mobile-app
       dockerfile: Dockerfile
     ports:
       - "3002:3002"

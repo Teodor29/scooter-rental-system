@@ -2,9 +2,9 @@
   "private": true,
   "workspaces": [
     "backend",
-    "webclient",
-    "admin-webclient",
-    "mobileclient",
+    "web-app",
+    "admin-dashboard",
+    "mobile-app",
     "simulation"
   ],
   "scripts": {

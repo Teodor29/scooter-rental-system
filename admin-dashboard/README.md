@@ -6,8 +6,8 @@ From the repository root:
 
 ```bash
 npm install
-cp admin-webclient/.env.example admin-webclient/.env
-npm run dev --workspace=admin-webclient
+cp admin-dashboard/.env.example admin-dashboard/.env
+npm run dev --workspace=admin-dashboard
 ```
 
 Open [http://localhost:3000](http://localhost:3000)

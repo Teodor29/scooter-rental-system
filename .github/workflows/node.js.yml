@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        project: [webclient, admin-webclient, mobileclient, simulation, backend]
+        project: [web-app, admin-dashboard, mobile-app, simulation, backend]
 
     steps:
       - uses: actions/checkout@v4

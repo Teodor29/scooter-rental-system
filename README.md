@@ -8,10 +8,10 @@ React, JavaScript, Vite, Node.js, Express, MongoDB and Docker Compose.
 
 ## Project Structure
 
-- `backend/` - Admin client
-- `webclient/` - Customer desktop client
-- `mobileclient/` - Customer mobile client
-- `admin-webclient/` - REST API and backend services
+- `backend/` - REST API and backend services
+- `web-app/` - Customer desktop client
+- `mobile-app/` - Customer mobile client
+- `admin-dashboard/` - Admin client
 - `simulation/` - Scooter simulation
 - `city-data/` - City data used to seed database
 - `docker-compose.yml` - Local development environment
