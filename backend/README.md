@@ -1,28 +1,13 @@
-# Access the database
+# Backend
 
-In order to get access to the database you need to add a .env file in the root of /backend.
-The file should contain the following:
+## Run Locally
 
-//Connect to MongoDB Atlas
-MONGODB_URI="<your-mongodb-atlas-connection-string>"
+From the repository root:
 
-//Used for tests
-API_KEY='<your-api-key>'
-
-# API-keys
-
-Ask a maintainer for a valid API key, or generate your own for local development.
-
-### Example usage for requests
-
+```bash
+npm install
+cp backend/.env.example backend/.env
+npm run start --workspace=backend
 ```
-const response = await fetch(
-    'http://localhost:5001/api/v1/customers/all-customers',
-    {
-        method: 'GET',
-        headers: {
-            'x-api-key': '<your-api-key>',
-            'Content-Type': 'application/json'
-        },
-    },);
-```
+
+Open [http://localhost:5000](http://localhost:5000)
